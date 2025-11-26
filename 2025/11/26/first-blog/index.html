@@ -49,7 +49,6 @@
 
 
   
-  <script size="300" alpha="0.6" zIndex="-1" src="https://cdnjs.cloudflare.com/ajax/libs/ribbon.js/1.0.2/ribbon.min.js" defer></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
 <script src="/blog/js/utils.js" defer></script><script src="/blog/js/motion.js" defer></script><script src="/blog/js/sidebar.js" defer></script><script src="/blog/js/next-boot.js" defer></script>
 
@@ -67,26 +66,47 @@
 
 
 <style>
-/* 全局背景图片 */
-body {
-  background: url(/blog/images/back.jpg) no-repeat center center fixed !important;
-  background-size: cover !important;
-}
+  body {
+    background: url(/blog/images/back.jpg) no-repeat center center fixed !important;
+    background-size: cover !important;
+  }
 
-/* 可选：让内容区半透明，文字更好读（强烈推荐） */
-.main-inner,
-.post-block,
-.nexmoe-content {
-  background: rgba(255, 255, 255, 0.95) !important;
-  backdrop-filter: blur(5px) !important;
-  border-radius: 8px !important;
-}
+  /* 全部透明化 + 去圆角去阴影 */
+  .main-inner, .post-block, .recent-post-item, .sidebar, .sidebar-inner,
+  .pagination, .comments, .post-body, .post-header, .page-header,
+  .site-overview, .links-of-author, pre, .highlight {
+    background: transparent !important;
+    box-shadow: none !important;
+    border-radius: 0 !important;
+    border: none !important;
+  }
 
-/* 深色模式下调整（如果你的 darkmode: true） */
-body.dark .main-inner,
-body.dark .post-block {
-  background: rgba(0, 0, 0, 0.85) !important;
-}
+  /* 大标题白 + 其余黑/白（你原来的） */
+  .site-title a, .site-title { color: #ffffff !important; opacity: 1 !important; }
+  body *:not(.site-title):not(.site-title *) { color: #000000 !important; opacity: 1 !important; }
+  body.dark *:not(.site-title):not(.site-title *) { color: #ffffff !important; opacity: 1 !important; }
+  pre code, .highlight code, .gutter pre { color: inherit !important; }
+
+  /* ========= 新增：半透明白边框 + 毛玻璃（只加在这几行） ========= */
+  .post-block,
+  .recent-post-item,
+  .main-inner,
+  .sidebar-inner,
+  .comments {
+    border: 1px solid rgba(255, 255, 255, 0.25) !important;     /* 亮模式半透明白边框 */
+    background: rgba(255, 255, 255, 0.08) !important;          /* 极淡毛玻璃底 */
+    backdrop-filter: blur(10px) !important;
+    padding: 20px 25px !important;
+  }
+  body.dark .post-block,
+  body.dark .recent-post-item,
+  body.dark .main-inner,
+  body.dark .sidebar-inner,
+  body.dark .comments {
+    border: 1px solid rgba(255, 255, 255, 0.18) !important;     /* 暗模式更淡一点 */
+    background: rgba(0, 0, 0, 0.12) !important;
+    backdrop-filter: blur(10px) !important;
+  }
 </style>
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">

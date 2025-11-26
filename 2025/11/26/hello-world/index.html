@@ -66,6 +66,28 @@
 
 
 
+<style>
+/* 全局背景图片 */
+body {
+  background: url(/images/back.jpg) no-repeat center center fixed !important;
+  background-size: cover !important;
+}
+
+/* 可选：让内容区半透明，文字更好读（强烈推荐） */
+.main-inner,
+.post-block,
+.nexmoe-content {
+  background: rgba(255, 255, 255, 0.95) !important;
+  backdrop-filter: blur(5px) !important;
+  border-radius: 8px !important;
+}
+
+/* 深色模式下调整（如果你的 darkmode: true） */
+body.dark .main-inner,
+body.dark .post-block {
+  background: rgba(0, 0, 0, 0.85) !important;
+}
+</style>
   <noscript>
     <link rel="stylesheet" href="/blog/css/noscript.css">
   </noscript>

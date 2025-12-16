@@ -1257,7 +1257,7 @@ pre code {
   vertical-align: middle;
 }
 .links-of-author a::before {
-  background: #14ff42;
+  background: #ff4eff;
   display: inline-block;
   margin-right: 3px;
   transform: translateY(-2px);
@@ -2685,4 +2685,13 @@ header.header {
 }
 .sub-menu .menu-item {
   display: inline-block;
+}
+.main-inner {
+  background: rgba(255,255,255,0.7); /* 0.9代表90%不透明，你可以改成 0.8 试试 */
+  padding: 25px; /* 给文字留点呼吸空间 */
+  border-radius: 10px; /* 让幕布的四个角变得圆润 */
+  box-shadow: 0 0 10px rgba(0,0,0,0.1); /* 加一点点阴影，更有立体感 */
+}
+.content-wrap {
+  background: transparent !important;
 }

